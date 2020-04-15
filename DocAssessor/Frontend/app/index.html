@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html  lang = "en">
+<head>
+    <title>Document Assessor</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+
+
+<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-info">
+    <!--div class="navbar-collapse collapse justify-content-stretch" id="navbar" -->
+	
+	<!-- Brand -- Display an image in the navigation bar on the left-->
+	<a class="navbar-brand" href="#">
+    <img src="image.jpeg" alt="Logo" style="width:40px;">
+    </a>
+	<a class="navbar-brand" href="#">DocAssessor</a>
+	
+	 <!-- Sign in and Register links in the navigation bar-->
+        <ul class="navbar-nav ml-auto">
+		    <!-- Create a search box and button-->
+		    <form class="form-inline"> <!-- To be updated later action="/action_page.php"-->
+				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+				<button class="btn btn-success" type="submit">Search</button>
+            </form>
+            <li class="nav-item active">
+                <a class="nav-link"  data-toggle="modal" data-target="#loginModal">Sign In <span class="sr-only">Sign In</span></a>
+            </li>
+            <!--li class="nav-item active">
+                <a class="nav-link" href="#">Register</a>
+            </li-->
+			<!--li class="nav-item">
+                <a class="nav-link" href="#">View Task List</a>
+            </li-->
+        </ul>
+        <!--ul class="navbar-nav ml-auto">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  My Account
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				 <a class="dropdown-item" href="#">View Account</a>
+				 
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign In</a>
+				</div>
+			</li>
+        </ul--s>
+    <!--/div-->
+</nav>
+<!-- end navigation -->
+<!-- Container Class -->
+<div class="container  pt-3 p-3 my-3 border bg-info">
+   
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" ><h1>Document Assessor - User View</h1></div>
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8" ><h4>Signup and assess the resources of various reserach topics</h4></div> <!-- to be corrected-->
+    <!--div class="col-sm-3"</div-->
+  <!--p>View assessment tasks,signup and assess the resources of various reserach topics</p-->
+  </div>
+
+<!-- End of Container Class -->
+<!-- Login Modal  ---->
+<div class="modal fade login" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">User Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+		  <div class="form-group">
+			<label for="email">Email address</label>
+			<input type="email" class="form-control" id="email" placeholder="Enter email">
+		  </div>
+		  <div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" class="form-control" id="password" placeholder="Password">
+		  </div>
+		      <small class="form-text text-muted">New user? Register <a href="#registerModal" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">here <a></small>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end login modal --->
+<!-- Register Modal  ---->
+<div class="modal fade register" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="regModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regModalLabel">User Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+		<div class="form-group">
+			<label for="FirstName">First Name</label>
+			<input type="text" class="form-control" id="FirstName" Placeholder="Enter First name">
+		  </div>
+		<div class="form-group">
+			<label for="LastName">Last Name</label>
+			<input type="text" class="form-control" id="LastName" placeholder="Enter Last name">
+		  </div>
+		  <div class="form-group">
+			<label for="email">Email address</label>
+			<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+		  </div>
+		  <div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" class="form-control" id="password" placeholder="Password">
+		  </div>
+		  <div class="form-group">
+			<label for="Confirmpassword">	Confirm Password</label>
+			<input type="password" class="form-control" id="Confirmpassword" placeholder="Confirm Password">
+		  </div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Register modal --->
+</body>
+</html>
