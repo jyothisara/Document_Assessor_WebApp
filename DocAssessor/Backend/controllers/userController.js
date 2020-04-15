@@ -1,5 +1,5 @@
 const express = require("express");
-const {body, validationResult} = require("express-validator/check");
+const {body, validationResult} = require("express-validator");
 //const {validationResult} = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -13,6 +13,7 @@ exports.validate = (method) => {
   switch (method) {
     case 'signup': {
      return [ 
+        body('userName', 'Invalid username. Please enter a valid email').exists().isLength({min:6}),
         body('email', 'Invalid email. Please enter a valid email').exists().isEmail(),
         body('password', 'Invalid password. Please enter a valid password').isLength({min:6}),
        ]   
@@ -31,6 +32,7 @@ exports.signup = async (req, res) => {
     const {
         firstName,
         lastName,
+        userName,
         email,
         password
     } = req.body;
@@ -40,13 +42,21 @@ exports.signup = async (req, res) => {
         });
         if (user) {
             return res.status(400).json({
-                msg: "User Already Exists"
+                msg: "User with this email Already Exists"
             });
         }
-    
+        let username = await User.findOne({
+          userName
+      });
+      if (username) {
+          return res.status(400).json({
+              msg: "Username Already Exists"
+          });
+      }
         user = new User({
             firstName,
             lastName,
+            userName,
             email,
             password
         });
@@ -81,6 +91,7 @@ exports.signup = async (req, res) => {
 };
 
 //User Login
+
 exports.login= async (req,res) => {
     const { email, password } = req.body;
     try {
