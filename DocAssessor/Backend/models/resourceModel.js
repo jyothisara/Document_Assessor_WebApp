@@ -7,7 +7,7 @@ const resourceSchema = new mongoose.Schema({
         required: true
       },
     links: [{
-        type: mongoose.SchemaTypes.Url
+        type: String
         
       }],
     forms: [

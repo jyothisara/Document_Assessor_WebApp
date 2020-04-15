@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-require('mongoose-type-url');
+
 
 const formSchema = new mongoose.Schema({
     link: {
-        type: mongoose.SchemaTypes.Url,
+        type: String,
         required: true
       },
     text: {

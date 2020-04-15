@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-require('mongoose-type-url');
+
 
 const assessmentSchema = new mongoose.Schema({
     title: {
@@ -19,7 +19,7 @@ const assessmentSchema = new mongoose.Schema({
         required: true
       },
     instructions: {
-        type: mongoose.SchemaTypes.Url,
+        type: String,
         required: true
       },
     user: {
@@ -27,7 +27,7 @@ const assessmentSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
-        username: String
+        userName: String
     },
       userSignup :{
         type: Boolean,

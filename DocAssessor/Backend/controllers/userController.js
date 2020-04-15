@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 //Models
 const User = require("../models/userModel");
+const Assessment = require("../models/assessmentModel");
 
 
 //User Signup
@@ -13,7 +14,7 @@ exports.validate = (method) => {
   switch (method) {
     case 'signup': {
      return [ 
-        body('userName', 'Invalid username. Please enter a valid email').exists().isLength({min:6}),
+        body('userName', 'Invalid username. Please enter a username with minimum 6 characters').exists().isLength({min:6}),
         body('email', 'Invalid email. Please enter a valid email').exists().isEmail(),
         body('password', 'Invalid password. Please enter a valid password').isLength({min:6}),
        ]   
@@ -136,7 +137,7 @@ exports.login= async (req,res) => {
     }
   };
 
- //Loggedin session
+ //My profile
  
  exports.session = async (req, res) => {
     try {
@@ -146,6 +147,5 @@ exports.login= async (req,res) => {
       res.send({ message: "Error in Fetching user" });
     }
   };
-
 
   
