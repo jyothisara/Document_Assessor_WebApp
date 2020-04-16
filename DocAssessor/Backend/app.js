@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 4000;
 //Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/user', routes);
+app.use('/', routes);
 
 app.listen(PORT, () => {
     console.log('Server is up and running on port number ' + PORT);

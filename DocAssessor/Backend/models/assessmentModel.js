@@ -10,10 +10,6 @@ const assessmentSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-    numResources: {
-        type: Number,
-        required: true
-      },
     numAssessmentsPerUser: {
         type: Number,
         required: true
@@ -31,7 +27,8 @@ const assessmentSchema = new mongoose.Schema({
     },
       userSignup :{
         type: Boolean,
-        required: true
+        required: true,
+        default: false
       }
     });
 

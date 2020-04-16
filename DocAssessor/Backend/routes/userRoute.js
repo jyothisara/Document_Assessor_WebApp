@@ -8,9 +8,11 @@ const assessmentController = require('../controllers/assessmentController');
 const auth = require('../middleware/auth')
 
 //Routes
-router.post( '/signup',  userController.validate('signup'),  userController.signup)
+router.post( '/register',  userController.validate('register'),  userController.register)
 router.post( '/login',  userController.login)
 router.get('/me', auth,userController.session)
-router.get('/assessment/:id', assessmentController.dashboard)
+router.get('/:u_id', assessmentController.dashboard)
+router.post('/:u_id/assessment/:a_id/signup', assessmentController.signup)
 
 module.exports = router;
+

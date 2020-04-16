@@ -9,10 +9,10 @@ const User = require("../models/userModel");
 const Assessment = require("../models/assessmentModel");
 
 
-//User Signup
+//User Registration
 exports.validate = (method) => {
   switch (method) {
-    case 'signup': {
+    case 'register': {
      return [ 
         body('userName', 'Invalid username. Please enter a username with minimum 6 characters').exists().isLength({min:6}),
         body('email', 'Invalid email. Please enter a valid email').exists().isEmail(),
@@ -22,7 +22,7 @@ exports.validate = (method) => {
   }
 }
 
-exports.signup = async (req, res) => {
+exports.register = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({

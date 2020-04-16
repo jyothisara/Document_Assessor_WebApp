@@ -7,7 +7,7 @@ const Assessment = require("../models/assessmentModel");
 //Assessments List
 exports.dashboard = async (req, res) => {
   try {
-    const username = await User.findById({_id: req.params.id});
+    const username = await User.findById({_id: req.params.u_id});
     const assessment = await Assessment.find({user:{id: username.id,userName: username.userName} });
     res.json(assessment);
     // res.send({ message: username._id });
@@ -16,39 +16,12 @@ exports.dashboard = async (req, res) => {
   }
 };
 
-
-
-
-
-
-// exports.assessment_try = async (req, res) => {
-//     const {
-//         title,
-//         description,
-//         numResources,
-//         numAssessmentsPerUser,
-//         instructions,
-//         user: {
-//             id,
-//             userName
-//         },
-//         userSignup
-//     } = req.body;
-//     try {
-//        let  assessment = new Assessment({
-//         title,
-//         description,
-//         numResources,
-//         numAssessmentsPerUser,
-//         instructions,
-//         user: {
-//             id,
-//             userName
-//         },
-//         userSignup
-//         });
-//     } catch (err) {
-//         console.log(err.message);
-//         res.status(500).send("Error in Saving");
-//     }
-// };
+exports.signup = async (req, res) => {
+  try {
+    const username = await User.findById({_id: req.params.u_id});
+    const assessment = await Assessment.findOneAndUpdate({_id:req.params.a_id,user:{id: username.id,userName: username.userName} }, {$set: {userSignup:true}});
+    res.send({ message: "Signed for the assessment task "+assessment.title+' successfully.' });
+  } catch (e) {
+    res.send({ message: "Error in assessment signup" });
+  }
+};
