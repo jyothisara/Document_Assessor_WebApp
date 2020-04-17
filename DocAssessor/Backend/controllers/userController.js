@@ -1,18 +1,20 @@
 const express = require("express");
-const {body, validationResult} = require("express-validator/check");
+const {body, validationResult} = require("express-validator");
 //const {validationResult} = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 //Models
 const User = require("../models/userModel");
+const Assessment = require("../models/assessmentModel");
 
 
-//User Signup
+//User Registration
 exports.validate = (method) => {
   switch (method) {
-    case 'signup': {
+    case 'register': {
      return [ 
+        body('userName', 'Invalid username. Please enter a username with minimum 6 characters').exists().isLength({min:6}),
         body('email', 'Invalid email. Please enter a valid email').exists().isEmail(),
         body('password', 'Invalid password. Please enter a valid password').isLength({min:6}),
        ]   
@@ -20,7 +22,7 @@ exports.validate = (method) => {
   }
 }
 
-exports.signup = async (req, res) => {
+exports.register = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -31,6 +33,7 @@ exports.signup = async (req, res) => {
     const {
         firstName,
         lastName,
+        userName,
         email,
         password
     } = req.body;
@@ -40,13 +43,21 @@ exports.signup = async (req, res) => {
         });
         if (user) {
             return res.status(400).json({
-                msg: "User Already Exists"
+                msg: "User with this email Already Exists"
             });
         }
-    
+        let username = await User.findOne({
+          userName
+      });
+      if (username) {
+          return res.status(400).json({
+              msg: "Username Already Exists"
+          });
+      }
         user = new User({
             firstName,
             lastName,
+            userName,
             email,
             password
         });
@@ -81,6 +92,7 @@ exports.signup = async (req, res) => {
 };
 
 //User Login
+
 exports.login= async (req,res) => {
     const { email, password } = req.body;
     try {
@@ -125,7 +137,7 @@ exports.login= async (req,res) => {
     }
   };
 
- //Loggedin session
+ //My profile
  
  exports.session = async (req, res) => {
     try {
@@ -135,6 +147,5 @@ exports.login= async (req,res) => {
       res.send({ message: "Error in Fetching user" });
     }
   };
-
 
   
