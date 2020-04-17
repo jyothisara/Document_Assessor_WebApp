@@ -18,13 +18,12 @@ const assessmentSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-    user: {
-        id: {
+      resources: 
+        [{ 
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        userName: String
-    },
+            ref: 'Resource'
+        }]
+    ,
       userSignup :{
         type: Boolean,
         required: true,

@@ -1,27 +1,26 @@
 const mongoose = require('mongoose');
-require('mongoose-type-url');
 
 const resourceSchema = new mongoose.Schema({
     task: {
         type: String,
         required: true
       },
-    links: [{
+    link: {
         type: String
         
-      }],
-    forms: [
+      },
+    form: 
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Form'
         }
-    ],
+    ,
     user: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
-        username: String
+        userName: String
     },
     submissionStatus: {
         type: Boolean,

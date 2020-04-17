@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 
 const formSchema = new mongoose.Schema({
     link: {
-        type: String,
-        required: true
+        type: String
       },
     text: {
         type: String,
@@ -17,4 +16,3 @@ const formSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Form', formSchema);
-

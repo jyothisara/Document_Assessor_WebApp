@@ -12,7 +12,8 @@ router.post( '/register',  userController.validate('register'),  userController.
 router.post( '/login',  userController.login)
 router.get('/me', auth,userController.session)
 router.get('/:u_id', assessmentController.dashboard)
-router.post('/:u_id/assessment/:a_id/signup', assessmentController.signup)
+router.post('/:u_id/assessment-signup/:a_id', assessmentController.signup)
+router.get('/:u_id/assessment/:a_id', assessmentController.resources)
+router.post('/:u_id/assessment/:a_id/resource/:r_id', assessmentController.submitForm)
 
 module.exports = router;
-
