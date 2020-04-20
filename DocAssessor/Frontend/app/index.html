@@ -68,7 +68,12 @@
     <!--div class="col-sm-3"</div-->
   <!--p>View assessment tasks,signup and assess the resources of various reserach topics</p-->
   </div>
+<script>
+function fn_display(){
+ windows.href.location="https://www.w3schools.com/bootstrap4/bootstrap_buttons.asp";
+}
 
+</script>
 <!-- End of Container Class -->
 <!-- Login Modal  ---->
 <div class="modal fade login" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="false">
@@ -81,22 +86,24 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-		  <div class="form-group">
-			<label for="email">Email address</label>
-			<input type="email" class="form-control" id="email" placeholder="Enter email">
-		  </div>
-		  <div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password" placeholder="Password">
-		  </div>
-		      <small class="form-text text-muted">New user? Register <a href="#registerModal" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">here <a></small>
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
-      </div>
+        <form  action="http://localhost:4000/login" method="post" >
+          <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          </div>
+              <small class="form-text text-muted">New user? Register <a href="#registerModal" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">here <a></small>
+          <!-- <input type="submit" value="Send message"> <!--added-->
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="fn_display()">Submit</button>
+          </div>
+	  </form>
     </div>
   </div>
 </div>
@@ -112,33 +119,38 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="http://localhost:4000/register" method="post">
 		<div class="form-group">
 			<label for="FirstName">First Name</label>
-			<input type="text" class="form-control" id="FirstName" Placeholder="Enter First name">
+			<input type="text" class="form-control" id="firstName" name="firstName" Placeholder="Enter First name">
 		  </div>
 		<div class="form-group">
 			<label for="LastName">Last Name</label>
-			<input type="text" class="form-control" id="LastName" placeholder="Enter Last name">
-		  </div>
+			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last name">
+      </div>
+      <div class="form-group">
+        <label for="username">User Name</label>
+        <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter User name">
+        </div>
 		  <div class="form-group">
 			<label for="email">Email address</label>
-			<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+			<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
 		  </div>
 		  <div class="form-group">
 			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password" placeholder="Password">
+			<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 		  </div>
 		  <div class="form-group">
 			<label for="Confirmpassword">	Confirm Password</label>
-			<input type="password" class="form-control" id="Confirmpassword" placeholder="Confirm Password">
+			<input type="password" class="form-control" id="Confirmpassword" name="Confirmpassword" placeholder="Confirm Password">
 		  </div>
-		</form>
+		
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
