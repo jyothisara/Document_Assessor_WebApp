@@ -5,8 +5,6 @@ const Assessment = require("../models/assessmentModel");
 const Resource = require("../models/resourceModel");
 const Form = require("../models/formModel");
 
-
-
 	//Assessments List
   exports.dashboard = async (req, res) => {
     try {
@@ -39,21 +37,6 @@ exports.signup = async (req, res) => {
   }
 };
   
-
-// //Assessments List
-// exports.resources = async (req, res) => {
-//   try {
-//     const username = await User.findById({_id: req.params.u_id});
-//     const assessment = await Assessment.find({user:{id: username.id,userName: username.userName} });
-//     res.json(assessment);
-//     // res.send({ message: username._id });
-//   } catch (e) {
-//     console.log(e);
-//     res.send({ message: "Error in Fetching assessments" });
-//   }
-// };
-
-
 
 //Resouces List
 exports.resources = async (req, res) => {
@@ -89,7 +72,6 @@ exports.submitForm = async (req, res) => {
       res.status(500).send("Error in submitting form");
   }
 };
-
 // //User Login
 // exports.submitForm = function (req, res) {
 //   let product = new Product(
@@ -106,3 +88,19 @@ exports.submitForm = async (req, res) => {
 //       res.send('Product Created successfully')
 //   })
 // };
+
+
+
+// //Assessments List
+// exports.resources = async (req, res) => {
+//   try {
+//     const username = await User.findById({_id: req.params.u_id});
+//     const assessment = await Assessment.find({user:{id: username.id,userName: username.userName} });
+//     res.json(assessment);
+//     // res.send({ message: username._id });
+//   } catch (e) {
+//     console.log(e);
+//     res.send({ message: "Error in Fetching assessments" });
+//   }
+// };
+
