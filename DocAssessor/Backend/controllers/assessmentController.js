@@ -9,10 +9,10 @@ const Form = require("../models/formModel");
   exports.dashboard = async (req, res) => {
     try {
       const username = await User.findById({_id: req.params.u_id});
-     const resource = await Resource.findOne({user:{id: username.id,userName: username.userName} });
+     const resource = await Resource.find({user:{id: username.id,userName: username.userName}}, {id:1});
       //const resource = await Resource.find({user:{id: username.id,userName: username.userName} });
-      const assessment = await Assessment.find({resources:resource._id }) ;
-     // const assessment = await Assessment.find({resources $in resource._id }) ;
+      //const assessment = await Assessment.find({resources:resource.id }) ;
+      const assessment = await Assessment.find({resources: { $in: resource }}) ;
       res.json(assessment);
        //res.send({ message: resource });
     } catch (e) {
