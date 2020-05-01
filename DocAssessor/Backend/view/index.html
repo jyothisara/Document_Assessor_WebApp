@@ -103,10 +103,64 @@ function fn_sendlogin(form)
 			   //Get the token from the JSON response by parsing it.
 			   //let token = JSON.stringify(xmlhttp.response);
 			   let res = JSON.parse(xmlhttp.response);
-			   var token = res.token;
+			   		   
+			   if(res.token){
 			   //save the token to cookie for later user use.
 			   document.cookie = "token =" +token+"path=/";
 			   fn_getsession(token);
+			   }else
+			   {
+			   alert(res.message);
+			   }
+			   //var x = document.cookie;
+			   //alert(x);
+			   /*TODO : Login fail error conditions to be checked and implemented here*/
+               window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+			   }
+			//alert("This is to test");
+			event.preventDefault();
+}
+function fn_sendregister(form)
+{ 
+              
+            // Creating a XMLHttpRequest object 
+            var xmlhttp = new XMLHttpRequest(); 
+            var url = "http://localhost:4000/register"; 
+        
+            // open a connection 
+            xmlhttp.open("POST", url, true); 
+			        //alert("After open");   
+			
+            // Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			
+			       //alert("After open");   
+            
+  
+            // Converting JSON data to string 
+           
+            var data = JSON.stringify({ "firstName": form.firstName.value,"lastName": form.lastName.value,"userName": form.userName.value,"email": form.registeremail.value,"password": form.registerpassword.value}); 			
+            alert(data);
+            // Sending data with the request 
+            xmlhttp.send(data); 
+			
+			//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+			
+			xmlhttp.onload = function(){
+			   //Get the token from the JSON response by parsing it.
+			   //let token = JSON.stringify(xmlhttp.response);
+			   let res = JSON.parse(xmlhttp.response);
+			   if(res.token){
+			   document.cookie = "token =" +token+"path=/";
+			   fn_getsession(res.token);
+			   }else
+			   {
+			   alert(res.msg);
+			   }
+			   //var token = res.token;
+			   
+			   //save the token to cookie for later user use.
+			   
 			   //var x = document.cookie;
 			   //alert(x);
 			   /*TODO : Login fail error conditions to be checked and implemented here*/
@@ -163,7 +217,7 @@ function fn_sendlogin(form)
         </button>
       </div>
       <div class="modal-body">
-        <form action="http://localhost:4000/register" method="post">
+        <form name="registerForm">
 		<div class="form-group">
 			<label for="FirstName">First Name</label>
 			<input type="text" class="form-control" id="firstName" name="firstName" Placeholder="Enter First name">
@@ -178,11 +232,11 @@ function fn_sendlogin(form)
         </div>
 		  <div class="form-group">
 			<label for="email">Email address</label>
-			<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+			<input type="email" class="form-control" id="registeremail" name="email" aria-describedby="emailHelp" placeholder="Enter email">
 		  </div>
 		  <div class="form-group">
 			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+			<input type="password" class="form-control" id="registerpassword" name="password" placeholder="Password">
 		  </div>
 		  <div class="form-group">
 			<label for="Confirmpassword">	Confirm Password</label>
@@ -192,7 +246,7 @@ function fn_sendlogin(form)
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button  class="btn btn-primary" onclick="fn_sendregister(this.form)">Submit</button>
       </div>
     </form>
     </div>

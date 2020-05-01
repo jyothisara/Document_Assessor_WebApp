@@ -11,7 +11,6 @@
 
 
 
-
 </head>
 <body>
 <style>
@@ -31,11 +30,14 @@ body {
                 <a class="nav-link" href="home.html">Home <span class="sr-only">Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="My Task.html">My Tasks</a>
+                <a class="nav-link" href="My Tasks.html">My Tasks</a>
             </li>
 			<li class="nav-item">
                 <a class="nav-link" href="All_Tasks.html">View Task List</a>
             </li>
+			<!---For testing scipt-->
+			<!--button type="button" onclick="fn_getassessments()"> Display</button-->
+			<!------------------------------------>
         </ul>
         <ul class="navbar-nav ml-auto">
 			<li class="nav-item dropdown">
@@ -46,7 +48,7 @@ body {
 				 <a class="dropdown-item" href="#">View Account</a>
 				 
 				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign out</a>
+				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign Out</a>
 				</div>
 			</li>
         </ul>
@@ -69,76 +71,71 @@ function getCookie(cname) {
   }
   return "";
 }
-/*Function to sign up for the task*/
-function fn_signup()
-{
-            var userid = getCookie('userid');
+//Funtion to submit the assessment form
+function fn_sendassessment(form)
+{ 
+             var userid = getCookie('userid'); 
+            // Creating a XMLHttpRequest object 
             var xmlhttp = new XMLHttpRequest(); 
-            //var url = "http://localhost:4000/me";
-			/*assessment id hard coded for now*/
-			var url = "http://localhost:4000/user/"+userid+"/assessment-signup/"+"5e9778510ae08b2324a96284";
-			//alert(url);
-			xmlhttp.open("POST", url, true);
-			// Set the request header i.e. which type of content you are sending 
+            //var url = "http://localhost:4000/login"; 
+            var url = "http://localhost:4000/user/"+userid+"/assessment/"+"5e9778510ae08b2324a96284"+"/resource/"+"5e9854dc5d79602ce4653fa1";
+            // open a connection 
+			alert(url);
+            xmlhttp.open("POST", url, true); 
+			           
+			
+            // Set the request header i.e. which type of content you are sending 
             xmlhttp.setRequestHeader("Content-Type", "application/json"); 
-			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
 			
-			xmlhttp.send();
+			       
+            
+  
+            // Converting JSON data to string 
+            var data = JSON.stringify({ "text": form.feedback.value, "rating": form.rating.value }); 
+  
+            // Sending data with the request 
+            xmlhttp.send(data); 
 			
+			//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
 			
-            xmlhttp.onload = function(){
-			   //Get the user session details from server.
+			xmlhttp.onload = function(){
+			   //Get the token from the JSON response by parsing it.
+			   //let token = JSON.stringify(xmlhttp.response);
 			   let res = JSON.parse(xmlhttp.response);
-			   alert(res.message);
-			   /*var userid = res._id;
-			   var firstname = res.firstName;*/
-			   //alert("response received");
-			   //alert(res[1].description);
-			   //save the token to cookie for later user use.
-			   
-			   //document.cookie = "firstname =" +firstname;
+			   alert(xmlhttp.response);
 			   
 			   }
+			//alert("This is to test");
+			event.preventDefault();
 }
 </script>
-
 <!-- Main Layout -->
 <div class="container">
 	<div class="row mx-auto">
 		<div class="col md-3  ">
 		<br>
 			
-				<h2 style="text-align:center ">List of All Tasks</h2>
-				<div class= "card border"></div>
+				<h2 style="text-align:center ">Provide assessment for the resource</h2>
+				<div class= "card  border border-warning"></div>
 				<div class="card-body border border-dark">
-					<table class="table ">
-					  <thead class="thead-dark">
-						<tr>
-						  <th scope="col">#</th>
-						  <th scope="col">Title</th>
-						  <th scope="col">Description</th>
-						  <th scope="col">Status</th>
-						  <th scope="col">View</th>
-						</tr>
-					  </thead>
-					  <tbody>
-						<tr>
-						  <th scope="row">1</th>
-						  <td>Task 1</td>
-						  <td>Description 1</td>
-						  <td>Status 1</td>
-						  <!--td><a href="#" class="btn btn-primary">View Details</a></td-->
-						  <td><button  onclick="fn_signup()" class="btn btn-primary">Sign up</td>
-						</tr>
-						<tr>
-						  <th scope="row">2</th>
-						  <td>Task 2</td>
-						  <td>Description 2</td>
-						  <td>Status 2</td>
-						  <td><a href="#" class="btn btn-primary">View Details</a></td>
-						</tr>
-					  </tbody>
-					</table>
+				   <form name="assessmentForm">
+						  <div class="form-group">
+						  <label for="Feedback">Feedback</label>
+						  <input type="text" class="form-control" id="feedback" name="feedback" placeholder="Provide your feedback of summary of the resourse here">
+						  </div>
+						  <div class="form-group">
+						  <label for="rating">Rating</label>
+						  <input type="text" class="form-control" id="rating" name="rating" placeholder="Provide your rating for the resource here.">
+						  </div>
+							  
+						
+						  </div>
+						  <div class="modal-footer">
+							
+							<button class="btn btn-primary" onclick="fn_sendassessment(this.form)">Submit</button>
+						  </div>
+					  </form>				
+					
 				</div>
 			</div>
 		</div>

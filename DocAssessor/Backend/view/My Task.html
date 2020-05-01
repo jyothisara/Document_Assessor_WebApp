@@ -33,7 +33,7 @@ function fn_getassessments()
             var xmlhttp = new XMLHttpRequest(); 
             //var url = "http://localhost:4000/me";
 			var url = "http://localhost:4000/user/"+userid;
-			alert(url);
+			//alert(url);
 			
 			xmlhttp.open("GET", url, true);
 			
@@ -49,12 +49,13 @@ function fn_getassessments()
 			
             xmlhttp.onload = function(){
 			   //Get the user session details from server.
-			   l//et res = JSON.parse(xmlhttp.response);
+			   let res = JSON.parse(xmlhttp.response);
 			   /*var userid = res._id;
 			   var firstname = res.firstName;*/
-			   alert(response);
+			   //alert("response received");
+			   //alert(res[1].description);
 			   //save the token to cookie for later user use.
-			   //document.cookie = "userid =" +userid;
+			   
 			   //document.cookie = "firstname =" +firstname;
 			   
 			   }
@@ -106,73 +107,39 @@ body {
     </div>
 </nav>
 <!-- end navigation -->
-
-<!-- Login Modal  ---->
-<div class="modal fade login" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">User Login</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-		  <div class="form-group">
-			<label for="email">Email address</label>
-			<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-		  </div>
-		  <div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password" placeholder="Password" name="password">
-		  </div>
-		      <small class="form-text text-muted">New user? Register <a href="#registerModal" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">here <a></small>
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end login modal --->
-<!-- Register Modal  ---->
-<div class="modal fade register" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="regModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="regModalLabel">User Login</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-		  <div class="form-group">
-			<label for="email">Email address</label>
-			<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-		  </div>
-		  <div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password" placeholder="Password" name="password">
-		  </div>
-		  <div class="form-group">
-			<label for="Confirmpassword">	Confirm Password</label>
-			<input type="password" class="form-control" id="Confirmpassword" placeholder="Confirm Password" name="confrmpassword">
-		  </div>
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
-      </div> 
-    </div>
-  </div>
-</div>
-
-<!-- end Register modal -->
+<script>
+/*Function to sign up for the task*/
+function fn_getresources()
+{
+            var userid = getCookie('userid');
+            var xmlhttp = new XMLHttpRequest(); 
+            //var url = "http://localhost:4000/me";
+			/*assessment id hard coded for now*/
+			var url = "http://localhost:4000/user/"+userid+"/assessment/"+"5e9778510ae08b2324a96284";
+			//alert(url);
+			xmlhttp.open("GET", url, true);
+			// Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
+			
+			xmlhttp.send();
+			
+			
+            xmlhttp.onload = function(){
+			   //Get the user session details from server.
+			   let res = JSON.parse(xmlhttp.response);
+			   alert(res[0]._id+" and "+res[1]._id);
+			   /*var userid = res._id;
+			   var firstname = res.firstName;*/
+			   //alert("response received");
+			   //alert(res[1].description);
+			   //save the token to cookie for later user use.
+			   
+			   //document.cookie = "firstname =" +firstname;
+			   window.location.href = "/Resources.html";
+			   }
+}
+</script>
 <!-- Main Layout -->
 <div class="container">
 	<div class="row mx-auto">
@@ -198,7 +165,8 @@ body {
 						  <td>Task 1</td>
 						  <td>Description 1</td>
 						  <td>Status 1</td>
-						  <td><a href="#" class="btn btn-primary">View Details</a></td>
+						  <!--td><a href="#" class="btn btn-primary">View Details</a></td-->
+						  <td><button  onclick="fn_getresources()" class="btn btn-primary">View resources</td>
 						</tr>
 						<tr>
 						  <th scope="row">2</th>

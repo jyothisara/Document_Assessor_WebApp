@@ -7,10 +7,61 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
-
-
+<!-- Function to retrive assessment data from the server-->
+<script>
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+function fn_getassessments()
+{
+            //get the user id from cookie
+			var userid = getCookie('userid');
+			//alert(userid);
+           // Creating a XMLHttpRequest object 
+            var xmlhttp = new XMLHttpRequest(); 
+            //var url = "http://localhost:4000/me";
+			var url = "http://localhost:4000/user/"+userid;
+			//alert(url);
+			
+			xmlhttp.open("GET", url, true);
+			
+			
+			
+			
+			 // Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
+			
+			xmlhttp.send();
+			
+			
+            xmlhttp.onload = function(){
+			   //Get the user session details from server.
+			   let res = JSON.parse(xmlhttp.response);
+			   /*var userid = res._id;
+			   var firstname = res.firstName;*/
+			   //alert("response received");
+			   //alert(res[1].description);
+			   //save the token to cookie for later user use.
+			   
+			   //document.cookie = "firstname =" +firstname;
+			   
+			   }
+}
+fn_getassessments();
+</script>
 
 </head>
 <body>
@@ -31,11 +82,14 @@ body {
                 <a class="nav-link" href="home.html">Home <span class="sr-only">Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="My Task.html">My Tasks</a>
+                <a class="nav-link" href="My Tasks.html">My Tasks</a>
             </li>
 			<li class="nav-item">
                 <a class="nav-link" href="All_Tasks.html">View Task List</a>
             </li>
+			<!---For testing scipt-->
+			<!--button type="button" onclick="fn_getassessments()"> Display</button-->
+			<!------------------------------------>
         </ul>
         <ul class="navbar-nav ml-auto">
 			<li class="nav-item dropdown">
@@ -46,7 +100,7 @@ body {
 				 <a class="dropdown-item" href="#">View Account</a>
 				 
 				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign out</a>
+				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign Out</a>
 				</div>
 			</li>
         </ul>
@@ -54,31 +108,16 @@ body {
 </nav>
 <!-- end navigation -->
 <script>
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 /*Function to sign up for the task*/
-function fn_signup()
+function fn_getresources()
 {
             var userid = getCookie('userid');
             var xmlhttp = new XMLHttpRequest(); 
             //var url = "http://localhost:4000/me";
 			/*assessment id hard coded for now*/
-			var url = "http://localhost:4000/user/"+userid+"/assessment-signup/"+"5e9778510ae08b2324a96284";
+			var url = "http://localhost:4000/user/"+userid+"/assessment/"+"5e9778510ae08b2324a96284";
 			//alert(url);
-			xmlhttp.open("POST", url, true);
+			xmlhttp.open("GET", url, true);
 			// Set the request header i.e. which type of content you are sending 
             xmlhttp.setRequestHeader("Content-Type", "application/json"); 
 			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
@@ -89,7 +128,7 @@ function fn_signup()
             xmlhttp.onload = function(){
 			   //Get the user session details from server.
 			   let res = JSON.parse(xmlhttp.response);
-			   alert(res.message);
+			   alert(res[0]._id+" and "+res[1]._id);
 			   /*var userid = res._id;
 			   var firstname = res.firstName;*/
 			   //alert("response received");
@@ -101,44 +140,28 @@ function fn_signup()
 			   }
 }
 </script>
-
 <!-- Main Layout -->
 <div class="container">
 	<div class="row mx-auto">
 		<div class="col md-3  ">
 		<br>
 			
-				<h2 style="text-align:center ">List of All Tasks</h2>
-				<div class= "card border"></div>
+				<h2 style="text-align:center ">Resources of Task1</h2>
+				<div class= "card  border border-warning"></div>
 				<div class="card-body border border-dark">
-					<table class="table ">
+					<table class="table">
 					  <thead class="thead-dark">
 						<tr>
-						  <th scope="col">#</th>
-						  <th scope="col">Title</th>
-						  <th scope="col">Description</th>
-						  <th scope="col">Status</th>
-						  <th scope="col">View</th>
+						  <th scope="col">Load the resource here</th>
+						  <!--th scope="col">Title</th-->
+						  <!--th scope="col">Description</th-->
+						  <!--th scope="col">Status</th-->
+						  <!--th scope="col">View</th-->
 						</tr>
 					  </thead>
-					  <tbody>
-						<tr>
-						  <th scope="row">1</th>
-						  <td>Task 1</td>
-						  <td>Description 1</td>
-						  <td>Status 1</td>
-						  <!--td><a href="#" class="btn btn-primary">View Details</a></td-->
-						  <td><button  onclick="fn_signup()" class="btn btn-primary">Sign up</td>
-						</tr>
-						<tr>
-						  <th scope="row">2</th>
-						  <td>Task 2</td>
-						  <td>Description 2</td>
-						  <td>Status 2</td>
-						  <td><a href="#" class="btn btn-primary">View Details</a></td>
-						</tr>
-					  </tbody>
+					  
 					</table>
+					<a href="Assessment.html">Assessment</a>
 				</div>
 			</div>
 		</div>

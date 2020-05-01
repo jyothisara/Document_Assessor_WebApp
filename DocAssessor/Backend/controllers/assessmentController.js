@@ -67,10 +67,11 @@ exports.submitForm = async (req, res) => {
     });
       await form.save();
       await Resource.findByIdAndUpdate({_id: req.params.r_id }, {$set: {form:form._id,submissionStatus:true}});
-      res.send("Form submitted Successfully" );
+      //res.send("Form submitted Successfully" );
+      res.status(200).json("Form submitted Successfully" );
   } catch (err) {
       console.log(err.message);
-      res.status(500).send("Error in submitting form");
+      res.status(500).json("Error in submitting form");
   }
 };
 // //User Login
