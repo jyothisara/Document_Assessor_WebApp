@@ -69,8 +69,8 @@ function fn_getsession(token)
 			   var firstname = res.firstName;
 			   //alert(userid);
 			   //save the token to cookie for later user use.
-			   document.cookie = "userid =" +userid+"path=/";
-			   document.cookie = "firstname =" +firstname+"path=/";
+			   document.cookie = "userid =" +userid;
+			   document.cookie = "firstname =" +firstname;
 			   
 			   }
 }
@@ -83,14 +83,12 @@ function fn_sendlogin(form)
         
             // open a connection 
             xmlhttp.open("POST", url, true); 
-			console.log("OPEN");
-            
+			           
 			
             // Set the request header i.e. which type of content you are sending 
             xmlhttp.setRequestHeader("Content-Type", "application/json"); 
 			
-			console.log("request header");
-            
+			       
             
   
             // Converting JSON data to string 
@@ -98,7 +96,7 @@ function fn_sendlogin(form)
   
             // Sending data with the request 
             xmlhttp.send(data); 
-			console.log("send data");
+			
 			//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
 			
 			xmlhttp.onload = function(){

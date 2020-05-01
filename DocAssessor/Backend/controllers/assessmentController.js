@@ -8,6 +8,7 @@ const Form = require("../models/formModel");
 	//Assessments List
   exports.dashboard = async (req, res) => {
     try {
+      console.log("In assessment dashboard   "+ req.params.u_id);
       const username = await User.findById({_id: req.params.u_id});
      const resource = await Resource.findOne({user:{id: username.id,userName: username.userName} });
       //const resource = await Resource.find({user:{id: username.id,userName: username.userName} });

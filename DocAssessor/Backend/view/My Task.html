@@ -7,6 +7,60 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- Function to retrive assessment data from the server-->
+<script>
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+function fn_getassessments()
+{
+            //get the user id from cookie
+			var userid = getCookie('userid');
+			//alert(userid);
+           // Creating a XMLHttpRequest object 
+            var xmlhttp = new XMLHttpRequest(); 
+            //var url = "http://localhost:4000/me";
+			var url = "http://localhost:4000/user/"+userid;
+			alert(url);
+			
+			xmlhttp.open("GET", url, true);
+			
+			
+			
+			
+			 // Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
+			
+			xmlhttp.send();
+			
+			
+            xmlhttp.onload = function(){
+			   //Get the user session details from server.
+			   l//et res = JSON.parse(xmlhttp.response);
+			   /*var userid = res._id;
+			   var firstname = res.firstName;*/
+			   alert(response);
+			   //save the token to cookie for later user use.
+			   //document.cookie = "userid =" +userid;
+			   //document.cookie = "firstname =" +firstname;
+			   
+			   }
+}
+fn_getassessments();
+</script>
 
 </head>
 <body>
@@ -32,6 +86,9 @@ body {
 			<li class="nav-item">
                 <a class="nav-link" href="All_Tasks.html">View Task List</a>
             </li>
+			<!---For testing scipt-->
+			<!--button type="button" onclick="fn_getassessments()"> Display</button-->
+			<!------------------------------------>
         </ul>
         <ul class="navbar-nav ml-auto">
 			<li class="nav-item dropdown">
@@ -42,7 +99,7 @@ body {
 				 <a class="dropdown-item" href="#">View Account</a>
 				 
 				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign In</a>
+				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign Out</a>
 				</div>
 			</li>
         </ul>
