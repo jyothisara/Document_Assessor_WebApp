@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 //Models
 const User = require("../models/userModel");
 const Assessment = require("../models/assessmentModel");
+var path=require('path');//sandhya
+var dashboard = require('../routes/dashboard');//sandhya
 
 
 //User Registration
@@ -80,9 +82,18 @@ exports.register = async (req, res) => {
             },
             (err, token) => {
                 if (err) throw err;
-                res.status(200).json({
-                    token
-                });
+                /*Sandhya */
+                //res.status(200).json({
+                  // token
+                    
+                //});
+               // res.redirect(home);
+         
+          //res.sendFile(path.join(__dirname,'../view/home.html'));
+          //res.render(path.join(__dirname,'../view/home.html'));
+           
+          console.log("invoked home.html");
+          /**** */
             }
         );
     } catch (err) {
@@ -94,8 +105,12 @@ exports.register = async (req, res) => {
 //User Login
 
 exports.login= async (req,res) => {
-    const { email, password } = req.body;
-    try {
+    //const { email, password } = req.body;
+    const  email = req.body.email;
+    const  password  = req.body.password;
+    console.log(req.body.email);
+    console.log(req.body.password);
+    //try {
       let user = await User.findOne({
         email
       });
@@ -110,6 +125,9 @@ exports.login= async (req,res) => {
           message: "Incorrect Password !"
         });
 
+
+
+
       const payload = {
         user: {
           id: user.id
@@ -123,18 +141,28 @@ exports.login= async (req,res) => {
           expiresIn: 3600
         },
         (err, token) => {
-          if (err) throw err;
-          res.status(200).json({
+         // if (err) throw err;
+          console.log("login success");
+          /*Sandhya */
+          //res.status(200);
+          //console.log(token);
+         res.status(200).json({
             token
           });
+         //res.redirect('/dashboard');
+          //res.sendFile(path.join(__dirname,'../view/home.html'));
+         //res.render(path.join(__dirname,'../view/home.html'));
+
+          //console.log("invoked home.html");
+          /**** */
         }
       );
-    } catch (e) {
+    /* } catch (e) {
       console.error(e);
-      res.status(500).json({
+      /* res.status(500).json({
         message: "Server Error"
-      });
-    }
+      }); 
+    } */
   };
 
  //My profile

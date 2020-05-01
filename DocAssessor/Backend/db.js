@@ -1,7 +1,7 @@
 //declaring mongoose package to connect to db
 var mongoose = require('mongoose'); 
 
-mongoose.connect('mongodb://admin:password@localhost:27017/DocAssessor', (err) => {
+mongoose.connect('mongodb://localhost:27017/DocAssessor', (err) => {
     if(!err)     
         console.log('Mongodb connection succeeded');
     else        

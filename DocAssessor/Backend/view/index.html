@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html  lang = "en">
+<head>
+<title>Document Assessor</title>
+<!-- Bootstrap Style sheet  -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- Bootstrap JS file -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<style>
+body {
+  background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+</style>
+<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse justify-content-stretch" id="navbar">
+        <!-- Brand -- Display an image in the navigation bar on the left-->
+	<a class="navbar-brand" href="#">
+    <!--img src="image.jpeg" alt="Logo" style="width:40px;"></image-->
+    </a>
+	<a class="navbar-brand" href="#">DocAssessor</a>
+	<!-- Sign in and Register links in the navigation bar-->
+        <ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+                <a class="nav-link"  data-toggle="modal" data-target="#loginModal">Sign In <span class="sr-only">Sign In</span></a>
+            </li>
+				
+        </ul>
+    </div>
+</nav>
+<!-- end navigation -->
+
+<script>
+
+function fn_sendlogin(form)
+{ 
+              
+            // Creating a XHR object 
+            var xmlhttp = new XMLHttpRequest(); 
+            var url = "http://localhost:4000/login"; 
+        
+            // open a connection 
+            xmlhttp.open("POST", url, true); 
+			console.log("OPEN");
+  
+            // Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			console.log("request header");
+            
+            // Create a state change callback 
+            /*xmlhttp.onreadystatechange = function () { 
+			alert("This is to test");
+               // if (xmlhttp.readyState > 3 && xmlhttp.status == 200) { 
+				if ( xmlhttp.status == 200) { 
+  
+                    window.location.href = "/home.html";
+  
+                } 
+            }; */
+  
+            // Converting JSON data to string 
+            var data = JSON.stringify({ "email": form.email.value, "password": form.password.value }); 
+  
+            // Sending data with the request 
+            xmlhttp.send(data); 
+			console.log("send data");
+			
+			xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+			//alert("This is to test");
+			event.preventDefault();
+}
+
+
+</script>
+<!-- Login Modal  ---->
+<div class="modal fade login" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">User Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="id01" class="modal-body">
+        <form name="loginForm">
+          <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          </div>
+              <small class="form-text text-muted">New user? Register <a href="#registerModal" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">here <a></small>
+          <!-- <input type="submit" value="Send message"> <!--added-->
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!--button type="submit" class="btn btn-primary" onclick="fn_sendlogin(email,password)">Submit</button-->
+			<button class="btn btn-primary" onclick="fn_sendlogin(this.form)">Submit</button>
+          </div>
+	  </form>
+    </div>
+  </div>
+</div>
+<!-- end login modal --->
+<!-- Register Modal  ---->
+<div class="modal fade register" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="regModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regModalLabel">User Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="http://localhost:4000/register" method="post">
+		<div class="form-group">
+			<label for="FirstName">First Name</label>
+			<input type="text" class="form-control" id="firstName" name="firstName" Placeholder="Enter First name">
+		  </div>
+		<div class="form-group">
+			<label for="LastName">Last Name</label>
+			<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last name">
+      </div>
+      <div class="form-group">
+        <label for="username">User Name</label>
+        <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter User name">
+        </div>
+		  <div class="form-group">
+			<label for="email">Email address</label>
+			<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+		  </div>
+		  <div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+		  </div>
+		  <div class="form-group">
+			<label for="Confirmpassword">	Confirm Password</label>
+			<input type="password" class="form-control" id="Confirmpassword" name="Confirmpassword" placeholder="Confirm Password">
+		  </div>
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!-- end Register modal --->
+<!-- Main Layout -->
+<div class="container">
+<div class="row">
+                <div class="col-sm-10 offset-sm-1 text-center">
+                    <h2 class="display-3">Welcome to  Document Assessor</h2>
+				</div>
+			</div>
+
+</div>
+</div>
+<!-- End Main Layout>-->
+</body>
+</html>
