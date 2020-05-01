@@ -8,6 +8,7 @@ const Form = require("../models/formModel");
 	//Assessments List
   exports.dashboard = async (req, res) => {
     try {
+      console.log("In assessment dashboard   "+ req.params.u_id);
       const username = await User.findById({_id: req.params.u_id});
      const resource = await Resource.find({user:{id: username.id,userName: username.userName}}, {id:1});
       //const resource = await Resource.find({user:{id: username.id,userName: username.userName} });
@@ -66,10 +67,11 @@ exports.submitForm = async (req, res) => {
     });
       await form.save();
       await Resource.findByIdAndUpdate({_id: req.params.r_id }, {$set: {form:form._id,submissionStatus:true}});
-      res.send("Form submitted Successfully" );
+      //res.send("Form submitted Successfully" );
+      res.status(200).json("Form submitted Successfully" );
   } catch (err) {
       console.log(err.message);
-      res.status(500).send("Error in submitting form");
+      res.status(500).json("Error in submitting form");
   }
 };
 // //User Login
