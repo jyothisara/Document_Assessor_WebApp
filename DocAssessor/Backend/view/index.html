@@ -43,31 +43,55 @@ body {
 
 <script>
 
+/*Function to get the usr id and session from the token*/
+function fn_getsession(token)
+{
+           // Creating a XMLHttpRequest object 
+            var xmlhttp = new XMLHttpRequest(); 
+            var url = "http://localhost:4000/me";
+			
+			xmlhttp.open("GET", url, true);
+			
+			
+			
+			
+			 // Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			xmlhttp.setRequestHeader("token", token); //set the token in the header.
+			
+			xmlhttp.send();
+			
+			
+            xmlhttp.onload = function(){
+			   //Get the user session details from server.
+			   let res = JSON.parse(xmlhttp.response);
+			   var userid = res._id;
+			   var firstname = res.firstName;
+			   //alert(userid);
+			   //save the token to cookie for later user use.
+			   document.cookie = "userid =" +userid+"path=/";
+			   document.cookie = "firstname =" +firstname+"path=/";
+			   
+			   }
+}
 function fn_sendlogin(form)
 { 
               
-            // Creating a XHR object 
+            // Creating a XMLHttpRequest object 
             var xmlhttp = new XMLHttpRequest(); 
             var url = "http://localhost:4000/login"; 
         
             // open a connection 
             xmlhttp.open("POST", url, true); 
 			console.log("OPEN");
-  
+            
+			
             // Set the request header i.e. which type of content you are sending 
             xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			
 			console.log("request header");
             
-            // Create a state change callback 
-            /*xmlhttp.onreadystatechange = function () { 
-			alert("This is to test");
-               // if (xmlhttp.readyState > 3 && xmlhttp.status == 200) { 
-				if ( xmlhttp.status == 200) { 
-  
-                    window.location.href = "/home.html";
-  
-                } 
-            }; */
+            
   
             // Converting JSON data to string 
             var data = JSON.stringify({ "email": form.email.value, "password": form.password.value }); 
@@ -75,8 +99,21 @@ function fn_sendlogin(form)
             // Sending data with the request 
             xmlhttp.send(data); 
 			console.log("send data");
+			//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
 			
-			xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+			xmlhttp.onload = function(){
+			   //Get the token from the JSON response by parsing it.
+			   //let token = JSON.stringify(xmlhttp.response);
+			   let res = JSON.parse(xmlhttp.response);
+			   var token = res.token;
+			   //save the token to cookie for later user use.
+			   document.cookie = "token =" +token+"path=/";
+			   fn_getsession(token);
+			   //var x = document.cookie;
+			   //alert(x);
+			   /*TODO : Login fail error conditions to be checked and implemented here*/
+               window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+			   }
 			//alert("This is to test");
 			event.preventDefault();
 }
