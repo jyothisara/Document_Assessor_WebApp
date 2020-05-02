@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <!-- Bootstrap Style sheet  -->
@@ -20,7 +21,7 @@
 </script>
 
 </head>
-<body >
+<body onload="fn_setusername()" >
 <style>
 body {
   background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
@@ -48,6 +49,9 @@ body {
 			<!------------------------------------>
         </ul>
         <ul class="navbar-nav ml-auto">
+				    <li>
+		    <a class="navbar-brand" href="#"> <div id="uname"></div></a>
+			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				  My Account
@@ -63,39 +67,6 @@ body {
     </div>
 </nav>
 <!-- end navigation -->
-<script>
-/*Function to sign up for the task*/
-function fn_getresources()
-{
-            var userid = getCookie('userid');
-            var xmlhttp = new XMLHttpRequest(); 
-            //var url = "http://localhost:4000/me";
-			/*assessment id hard coded for now*/
-			var url = "http://localhost:4000/user/"+userid+"/assessment/"+"5e9778510ae08b2324a96284";
-			//alert(url);
-			xmlhttp.open("GET", url, true);
-			// Set the request header i.e. which type of content you are sending 
-            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
-			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
-			
-			xmlhttp.send();
-			
-			
-            xmlhttp.onload = function(){
-			   //Get the user session details from server.
-			   let res = JSON.parse(xmlhttp.response);
-			   alert(res[0]._id+" and "+res[1]._id);
-			   /*var userid = res._id;
-			   var firstname = res.firstName;*/
-			   //alert("response received");
-			   //alert(res[1].description);
-			   //save the token to cookie for later user use.
-			   
-			   //document.cookie = "firstname =" +firstname;
-			   window.location.href = "/Resources.html";
-			   }
-}
-</script>
 <!-- Main Layout -->
 <div class="container">
 	<div class="row mx-auto">
@@ -105,7 +76,7 @@ function fn_getresources()
 				<h2 style="text-align:center ">List of My tasks</h2>
 				<div class= "card  border border-warning"></div>
 				<div class="card-body border border-dark">
-					<div id="cold"></div>
+					<div id="table"></div>
 				</div>
 			</div>
 		</div>
@@ -141,7 +112,7 @@ function fn_getassessments()
 				  return item['description'];
 				 
 				});
-				 fn_printname(response);
+				 fn_renderTable(response);
 			   }   
 }
 
@@ -161,14 +132,63 @@ function getCookie(cname) {
   return "";
 }
 
-function fn_printname(response){
-
+function fn_renderTable(response){
+setId =[];
 let datat=response;
 
 for(var i = 0; i < datat.length; i++) {
    // delete jsonArry[i]['YYY'];
+let setResources=[datat[i].resources];
+let setUser=[datat[i].userSignup];
+ setId[i]=[datat[i]._id].toString();
+let setassess=[datat[i].numAssessmentsPerUser];
+let setdesc=[datat[i].description];
+let setinst=[datat[i].instructions];
+let setTitle=[datat[i].title];
 
-delete datat[i].resources;
+}
+
+let objTable				= document.getElementById('table');
+let strTableData			='';
+
+
+	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black;">                  	'                   ;
+	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">                      '                   ;
+	//strTableData 				= strTableData + '	<td style="border: 1px solid black;"> ID </td>        '                   ;
+	
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Title </td>        '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Description </td>  '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Instruction </td>  '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resources </td>  '                   ;
+
+	strTableData 				= strTableData + '</tr>                     '                   ;
+	for(var i = 0; i < datat.length; i++){
+	
+		if(datat[i].userSignup == true){
+			strTableData 				= strTableData + '<tr style="border: 2px solid black;">                      '                   ;
+			//strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ i+' </td>  '          ;
+				
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].title]+' </td>  '          ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  '    ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].instructions]+' </td>  '   ;	
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="view resources" onclick="fn_navResources('+'setId['+i+']'+');">'+' </td>  '   ;
+			
+			strTableData 				= strTableData + '</tr>';
+			}
+	}
+		strTableData 				= strTableData + '</table>';
+	objTable.innerHTML	= strTableData;
+
+}
+function fn_navResources(setId){
+
+//fn_getresources(setId);
+
+alert('setId'+setId);
+document.cookie = "assessmentid =" +setId;
+   window.location.href = "/Resources.html";
+}
+/*delete datat[i].resources;
 delete datat[i].userSignup;
 delete datat[i]._id;
 delete datat[i].numAssessmentsPerUser;
@@ -198,8 +218,12 @@ var hotSettings = {
 };
 var hot = new Handsontable(hotElement, hotSettings);
 
+}*/
+function fn_setusername()
+{
+     //alert(getCookie('firstname'));
+	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
 }
-
 
 </script>
 </body>

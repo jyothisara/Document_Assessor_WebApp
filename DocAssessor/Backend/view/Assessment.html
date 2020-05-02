@@ -75,10 +75,13 @@ function getCookie(cname) {
 function fn_sendassessment(form)
 { 
              var userid = getCookie('userid'); 
+			  var assessmentid = getCookie('assessmentid'); 
+			   var resourceId = getCookie('resourceId'); 
+			   alert('resourceId'+resourceId);
             // Creating a XMLHttpRequest object 
             var xmlhttp = new XMLHttpRequest(); 
             //var url = "http://localhost:4000/login"; 
-            var url = "http://localhost:4000/user/"+userid+"/assessment/"+"5e9778510ae08b2324a96284"+"/resource/"+"5e9854dc5d79602ce4653fa1";
+            var url = "http://localhost:4000/user/"+userid+"/assessment/"+assessmentid+"/resource/"+resourceId;
             // open a connection 
 			alert(url);
             xmlhttp.open("POST", url, true); 

@@ -60,14 +60,15 @@ function fn_getsession(token)
 			xmlhttp.setRequestHeader("token", token); //set the token in the header.
 			
 			xmlhttp.send();
-			
+			//alert("inside getsession----");
 			
             xmlhttp.onload = function(){
 			   //Get the user session details from server.
+			   //alert("inside getsession----");
 			   let res = JSON.parse(xmlhttp.response);
 			   var userid = res._id;
 			   var firstname = res.firstName;
-			   //alert(userid);
+			  // alert(userid);
 			   //save the token to cookie for later user use.
 			   document.cookie = "userid =" +userid;
 			   document.cookie = "firstname =" +firstname;
@@ -93,6 +94,7 @@ function fn_sendlogin(form)
   
             // Converting JSON data to string 
             var data = JSON.stringify({ "email": form.email.value, "password": form.password.value }); 
+			//alert(data);
   
             // Sending data with the request 
             xmlhttp.send(data); 
@@ -107,6 +109,7 @@ function fn_sendlogin(form)
 			   if(res.token){
 			   //save the token to cookie for later user use.
 			   document.cookie = "token =" +res.token+"path=/";
+			    //alert('document.cookie'+document.cookie);
 			   fn_getsession(res.token);
 			   window.location.href = "/home.html";
 			   }else
