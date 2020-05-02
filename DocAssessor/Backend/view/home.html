@@ -9,7 +9,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body onload="fn_setusername()">
+
 <script>
 			//Retrive the user name from cookie to display in home page.
 			/*Reference w3schools*/
@@ -58,7 +59,7 @@ body {
         </ul>
         <ul class="navbar-nav ml-auto">
 		    <li>
-		    <a class="navbar-brand" href="#"> Welcome</a>
+		    <a class="navbar-brand" href="#"> <div id="uname"></div></a>
 			</li>
 			<li>
 			<!--div id="username"> value="username"</div-->
@@ -113,5 +114,11 @@ body {
 </div>
 </div>
 <!-- End Main Layout>-->
+<script>
+function fn_setusername()
+{
+     document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
+}
+</script>
 </body>
 </html>

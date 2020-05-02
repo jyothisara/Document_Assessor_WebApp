@@ -106,8 +106,9 @@ function fn_sendlogin(form)
 			   		   
 			   if(res.token){
 			   //save the token to cookie for later user use.
-			   document.cookie = "token =" +token+"path=/";
-			   fn_getsession(token);
+			   document.cookie = "token =" +res.token+"path=/";
+			   fn_getsession(res.token);
+			   window.location.href = "/home.html";
 			   }else
 			   {
 			   alert(res.message);
@@ -115,7 +116,7 @@ function fn_sendlogin(form)
 			   //var x = document.cookie;
 			   //alert(x);
 			   /*TODO : Login fail error conditions to be checked and implemented here*/
-               window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+               //alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
 			   }
 			//alert("This is to test");
 			event.preventDefault();
@@ -151,8 +152,9 @@ function fn_sendregister(form)
 			   //let token = JSON.stringify(xmlhttp.response);
 			   let res = JSON.parse(xmlhttp.response);
 			   if(res.token){
-			   document.cookie = "token =" +token+"path=/";
+			   document.cookie = "token =" +res.token+"path=/";
 			   fn_getsession(res.token);
+			    window.location.href = "/home.html";
 			   }else
 			   {
 			   alert(res.msg);
@@ -164,7 +166,7 @@ function fn_sendregister(form)
 			   //var x = document.cookie;
 			   //alert(x);
 			   /*TODO : Login fail error conditions to be checked and implemented here*/
-               window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+              //alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
 			   }
 			//alert("This is to test");
 			event.preventDefault();
