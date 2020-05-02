@@ -106,7 +106,7 @@ function fn_getassessments()
             xmlhttp.onload = function(){
 			   //Get the user session details from server.
 			   response= JSON.parse(xmlhttp.response);
-				alert(1);
+				//alert(1);
 				
 				var names = response.map(function(item) {
 				  return item['description'];
@@ -184,7 +184,7 @@ function fn_navResources(setId){
 
 //fn_getresources(setId);
 
-alert('setId'+setId);
+//alert('setId'+setId);
 document.cookie = "assessmentid =" +setId;
    window.location.href = "/Resources.html";
 }

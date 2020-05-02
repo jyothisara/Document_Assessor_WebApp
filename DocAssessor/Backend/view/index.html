@@ -144,7 +144,7 @@ function fn_sendregister(form)
             // Converting JSON data to string 
            
             var data = JSON.stringify({ "firstName": form.firstName.value,"lastName": form.lastName.value,"userName": form.userName.value,"email": form.registeremail.value,"password": form.registerpassword.value}); 			
-            alert(data);
+            
             // Sending data with the request 
             xmlhttp.send(data); 
 			

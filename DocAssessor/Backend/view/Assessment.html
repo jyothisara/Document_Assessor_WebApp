@@ -77,13 +77,13 @@ function fn_sendassessment(form)
              var userid = getCookie('userid'); 
 			  var assessmentid = getCookie('assessmentid'); 
 			   var resourceId = getCookie('resourceId'); 
-			   alert('resourceId'+resourceId);
+			   
             // Creating a XMLHttpRequest object 
             var xmlhttp = new XMLHttpRequest(); 
             //var url = "http://localhost:4000/login"; 
             var url = "http://localhost:4000/user/"+userid+"/assessment/"+assessmentid+"/resource/"+resourceId;
             // open a connection 
-			alert(url);
+			
             xmlhttp.open("POST", url, true); 
 			           
 			
@@ -105,7 +105,7 @@ function fn_sendassessment(form)
 			   //Get the token from the JSON response by parsing it.
 			   //let token = JSON.stringify(xmlhttp.response);
 			   let res = JSON.parse(xmlhttp.response);
-			   alert(xmlhttp.response);
+			   
 			   
 			   }
 			//alert("This is to test");
