@@ -1,14 +1,11 @@
 const express = require("express");
 const {body, validationResult} = require("express-validator");
-//const {validationResult} = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-//Models
+//Models Import
 const User = require("../models/userModel");
 const Assessment = require("../models/assessmentModel");
-var path=require('path');//sandhya
-var dashboard = require('../routes/dashboard');//sandhya
 
 
 //User Registration
@@ -23,7 +20,6 @@ exports.validate = (method) => {
     }
   }
 }
-
 exports.register = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -31,7 +27,6 @@ exports.register = async (req, res) => {
             errors: errors.array()
         });
     }
-
     const {
         firstName,
         lastName,
@@ -82,18 +77,8 @@ exports.register = async (req, res) => {
             },
             (err, token) => {
                 if (err) throw err;
-                /*Sandhya */
-                //res.status(200).json({
-                  // token
-                    
-                //});
-               // res.redirect(home);
-         
-          //res.sendFile(path.join(__dirname,'../view/home.html'));
-          //res.render(path.join(__dirname,'../view/home.html'));
            
           console.log("invoked home.html");
-          /**** */
             }
         );
     } catch (err) {
@@ -105,12 +90,10 @@ exports.register = async (req, res) => {
 //User Login
 
 exports.login= async (req,res) => {
-    //const { email, password } = req.body;
     const  email = req.body.email;
     const  password  = req.body.password;
     console.log(req.body.email);
     console.log(req.body.password);
-    //try {
       let user = await User.findOne({
         email
       });
@@ -125,9 +108,6 @@ exports.login= async (req,res) => {
           message: "Incorrect Password !"
         });
 
-
-
-
       const payload = {
         user: {
           id: user.id
@@ -141,32 +121,16 @@ exports.login= async (req,res) => {
           expiresIn: 3600
         },
         (err, token) => {
-         // if (err) throw err;
           console.log("login success");
-          /*Sandhya */
-          //res.status(200);
-          //console.log(token);
          res.status(200).json({
             token
           });
-         //res.redirect('/dashboard');
-          //res.sendFile(path.join(__dirname,'../view/home.html'));
-         //res.render(path.join(__dirname,'../view/home.html'));
-
-          //console.log("invoked home.html");
-          /**** */
+      
         }
       );
-    /* } catch (e) {
-      console.error(e);
-      /* res.status(500).json({
-        message: "Server Error"
-      }); 
-    } */
   };
 
  //My profile
- 
  exports.session = async (req, res) => {
     try {
       const user = await User.findById(req.user.id);
