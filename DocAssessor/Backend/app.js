@@ -6,7 +6,7 @@ const path = require('path');
 //local import
 var mongoose = require('./db.js');
 var routes = require('./routes/userRoute');
-var dashboardRouter = require('./routes/dashboard');
+
 
 //main app variable
 const app = express();
@@ -18,7 +18,6 @@ const PORT = process.env.PORT || 4000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/', routes);
-app.use('/dashboard',dashboardRouter);
 
 
 /*Sandhya - View engine*/

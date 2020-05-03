@@ -5,8 +5,14 @@ const Assessment = require("../models/assessmentModel");
 const Resource = require("../models/resourceModel");
 const Form = require("../models/formModel");
 
+//Dashboard View
+exports.dashboard = function(req,res){
+  //res.render(path.join(__dirname,'../view/home.html'));
+  res.send("In dashboard");
+}
+
 	//Assessments List
-  exports.dashboard = async (req, res) => {
+  exports.assessments = async (req, res) => {
     try {
       console.log("In assessment dashboard   "+ req.params.u_id);
       const username = await User.findById({_id: req.params.u_id});
