@@ -168,11 +168,15 @@ exports.login= async (req,res) => {
  //My profile
  
  exports.session = async (req, res) => {
+   console.log("Inside session");
     try {
       const user = await User.findById(req.user.id);
+      console.log("Inside session try");
+      console.log(user);
       res.json(user);
     } catch (e) {
-      res.send({ message: "Error in Fetching user" });
+      console.log("Inside session catch");
+      res.status(500).json({ message: "Error in Fetching user" });
     }
   };
 
