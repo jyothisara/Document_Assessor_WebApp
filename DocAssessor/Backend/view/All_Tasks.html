@@ -46,7 +46,7 @@ body {
 				 <a class="dropdown-item" href="#">View Account</a>
 				 
 				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign out</a>
+				  <a class="dropdown-item" data-toggle="modal" href="#" onclick="fn_signout()">Sign out</a>
 				</div>
 			</li>
         </ul>
@@ -54,6 +54,58 @@ body {
 </nav>
 <!-- end navigation -->
 <script>
+
+</script>
+
+<!-- Main Layout -->
+<div class="container">
+	<div class="row mx-auto">
+		<div class="col md-3  ">
+		<br>
+			
+				<h2 style="text-align:center ">List of All Tasks</h2>
+				<div class= "card border"></div>
+				<div class="card-body border border-dark text-dark bg-light">
+					<div id="table"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col"></div>
+	</div>
+	</div>
+</div>
+<!-- End Main Layout>-->
+<script> src="loginscript.js"</script>
+<script>
+fn_getassessments();
+function fn_getassessments()
+{
+            //get the user id from cookie
+			var userid = getCookie('userid');
+			alert("userid from getassessments "+userid);
+            var xmlhttp = new XMLHttpRequest(); 
+			var url = "http://localhost:4000/user/"+userid;
+			
+			xmlhttp.open("GET", url, true);
+			 // Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
+			
+			xmlhttp.send();
+
+            xmlhttp.onload = function(){
+			   //Get the user session details from server.
+			   response= JSON.parse(xmlhttp.response);
+				//alert(1);
+				
+				var names = response.map(function(item) {
+				  return item['description'];
+				 
+				});
+				 fn_renderTable(response);
+			   }   
+}
+
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -69,14 +121,64 @@ function getCookie(cname) {
   }
   return "";
 }
+function fn_renderTable(response){
+setId =[];
+let datat=response;
+
+for(var i = 0; i < datat.length; i++) {
+   // delete jsonArry[i]['YYY'];
+let setResources=[datat[i].resources];
+let setUser=[datat[i].userSignup];
+ setId[i]=[datat[i]._id].toString();
+let setassess=[datat[i].numAssessmentsPerUser];
+let setdesc=[datat[i].description];
+let setinst=[datat[i].instructions];
+let setTitle=[datat[i].title];
+
+}
+
+let objTable				= document.getElementById('table');
+let strTableData			='';
+
+
+	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black; table-layout: fixed;">                  	'                   ;
+	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">                      '                   ;
+	//strTableData 				= strTableData + '	<td style="border: 1px solid black;"> ID </td>        '                   ;
+	
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Title </td>        '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Description </td>  '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Instruction </td>  '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Sign up task </td>  '                   ;
+
+	strTableData 				= strTableData + '</tr>                     '                   ;
+	for(var i = 0; i < datat.length; i++){
+	
+		if(datat[i].userSignup != true){
+		    
+			strTableData 				= strTableData + '<tr style="border: 2px solid black;">                      '                   ;
+			//strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ i+' </td>  '          ;
+				
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].title]+' </td>  '          ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  '    ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;word-wrap: break-word;"> '+[datat[i].instructions]+' </td>  '   ;	
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Sign Up" style="background-color: #66b3ff;" onclick="fn_signup('+'setId['+i+']'+');">'+' </td>  '   ;
+			
+			strTableData 				= strTableData + '</tr>';
+			}
+	}
+		strTableData 				= strTableData + '</table>';
+	objTable.innerHTML	= strTableData;
+
+}
 /*Function to sign up for the task*/
-function fn_signup()
+function fn_signup(assessmentid)
 {
             var userid = getCookie('userid');
             var xmlhttp = new XMLHttpRequest(); 
             //var url = "http://localhost:4000/me";
 			/*assessment id hard coded for now*/
-			var url = "http://localhost:4000/user/"+userid+"/assessment-signup/"+"5e9778510ae08b2324a96284";
+			var url = "http://localhost:4000/user/"+userid+"/assessment-signup/"+assessmentid;
+			//var url = "http://localhost:4000/user/"+userid+"/assessment-signup/"+"5e9778510ae08b2324a96284";
 			//alert(url);
 			xmlhttp.open("POST", url, true);
 			// Set the request header i.e. which type of content you are sending 
@@ -89,63 +191,29 @@ function fn_signup()
             xmlhttp.onload = function(){
 			   //Get the user session details from server.
 			   let res = JSON.parse(xmlhttp.response);
-			   //alert(res.message);
+			   alert(res.message);
 			   /*var userid = res._id;
 			   var firstname = res.firstName;*/
 			   //alert("response received");
 			   //alert(res[1].description);
 			   //save the token to cookie for later user use.
-			   
+			   window.location.href = "/All_Tasks.html";
 			   //document.cookie = "firstname =" +firstname;
 			   
 			   }
 }
-</script>
+function fn_signout()
+{
+     //alert("Inside signout");
+     if (getCookie('userid')!="")
+		  {
+		  alert("Inside signout");
+		    document.cookie = "userid =";
+			document.cookie = "firstname =";
+			window.location.href = "/index.html";
+		  }
 
-<!-- Main Layout -->
-<div class="container">
-	<div class="row mx-auto">
-		<div class="col md-3  ">
-		<br>
-			
-				<h2 style="text-align:center ">List of All Tasks</h2>
-				<div class= "card border"></div>
-				<div class="card-body border border-dark">
-					<table class="table ">
-					  <thead class="thead-dark">
-						<tr>
-						  <th scope="col">#</th>
-						  <th scope="col">Title</th>
-						  <th scope="col">Description</th>
-						  <th scope="col">Status</th>
-						  <th scope="col">View</th>
-						</tr>
-					  </thead>
-					  <tbody>
-						<tr>
-						  <th scope="row">1</th>
-						  <td>Task 1</td>
-						  <td>Description 1</td>
-						  <td>Status 1</td>
-						  <!--td><a href="#" class="btn btn-primary">View Details</a></td-->
-						  <td><button  onclick="fn_signup()" class="btn btn-primary">Sign up</td>
-						</tr>
-						<tr>
-						  <th scope="row">2</th>
-						  <td>Task 2</td>
-						  <td>Description 2</td>
-						  <td>Status 2</td>
-						  <td><a href="#" class="btn btn-primary">View Details</a></td>
-						</tr>
-					  </tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col"></div>
-	</div>
-	</div>
-</div>
-<!-- End Main Layout>-->
+}
+</script>
 </body>
 </html>

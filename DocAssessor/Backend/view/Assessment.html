@@ -48,13 +48,14 @@ body {
 				 <a class="dropdown-item" href="#">View Account</a>
 				 
 				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign Out</a>
+				  <a class="dropdown-item" data-toggle="modal" href="#" onclick="fn_signout()">Sign Out</a>
 				</div>
 			</li>
         </ul>
     </div>
 </nav>
 <!-- end navigation -->
+<script> src="loginscript.js"</script>
 <script>
 function getCookie(cname) {
   var name = cname + "=";
@@ -106,10 +107,27 @@ function fn_sendassessment(form)
 			   //let token = JSON.stringify(xmlhttp.response);
 			   let res = JSON.parse(xmlhttp.response);
 			   
-			   
+			   alert("response after form submission"+res);
+			   $('#successModal').modal('show')
 			   }
 			//alert("This is to test");
 			event.preventDefault();
+}
+function fn_signout()
+{
+     //alert("Inside signout");
+     if (getCookie('userid')!="")
+		  {
+		  alert("Inside signout");
+		    document.cookie = "userid =";
+			document.cookie = "firstname =";
+			window.location.href = "/index.html";
+		  }
+
+}
+function fn_redirect(){
+   window.location.href = "/Resources.html";
+
 }
 </script>
 <!-- Main Layout -->
@@ -147,5 +165,23 @@ function fn_sendassessment(form)
 	</div>
 </div>
 <!-- End Main Layout>-->
+
+<!-- Success message--->
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+         Assessment Succesfully Submitted
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="fn_redirect();">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- --->
 </body>
 </html>

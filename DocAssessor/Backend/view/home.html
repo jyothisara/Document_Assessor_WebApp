@@ -10,29 +10,6 @@
 
 </head>
 <body onload="fn_setusername()">
-
-<script>
-			//Retrive the user name from cookie to display in home page.
-			/*Reference w3schools*/
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-//document.getElementById('id01').innerHTML = getCookie('firstname');
-//alert(getCookie('firstname'));
-			 
-</script>
 <style>
 body {
   background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
@@ -74,7 +51,8 @@ body {
 				 <a class="dropdown-item" href="#">View Account</a>
 				 
 				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" >Sign Out</a>
+				  <a class="dropdown-item" data-toggle="modal" href="#" onclick="fn_signout()" >Sign Out</a>
+				  <script> src="loginscripts.js"</script>
 				</div>
 			</li>
         </ul>
@@ -114,11 +92,44 @@ body {
 </div>
 </div>
 <!-- End Main Layout>-->
+<script> src="loginscripts.js"</script>
 <script>
+function fn_signout()
+{
+     //alert("Inside signout");
+     if (getCookie('userid')!="")
+		  {
+		  alert("Inside signout");
+		    document.cookie = "userid =";
+			document.cookie = "firstname =";
+			window.location.href = "/index.html";
+		  }
+
+}
 function fn_setusername()
 {
      //alert(getCookie('firstname'));
-	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
+	// document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
+		 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
+		// alert(document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname'));
+		//alert('localStorage.getItem("firstname")'+sessionStorage.getItem("firstname"));
+		//document.getElementById("uname").innerHTML = sessionStorage.getItem("firstname");
+
+}
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 </script>
 </body>

@@ -39,7 +39,7 @@ body {
                 <a class="nav-link" href="home.html">Home <span class="sr-only">Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="My Tasks.html">My Tasks</a>
+                <a class="nav-link" >My Tasks</a>
             </li>
 			<li class="nav-item">
                 <a class="nav-link" href="All_Tasks.html">View Task List</a>
@@ -60,7 +60,7 @@ body {
 				 <a class="dropdown-item" href="#">View Account</a>
 				 
 				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Sign Out</a>
+				  <a class="dropdown-item" data-toggle="modal" href="#" onclick="fn_signout()">Sign Out</a>
 				</div>
 			</li>
         </ul>
@@ -74,8 +74,8 @@ body {
 		<br>
 			
 				<h2 style="text-align:center ">List of My tasks</h2>
-				<div class= "card  border border-warning"></div>
-				<div class="card-body border border-dark">
+				<div class= "card  text-white bg-dark"></div>
+				<div class="card-body  text-dark bg-light">
 					<div id="table"></div>
 				</div>
 			</div>
@@ -85,7 +85,7 @@ body {
 	</div>
 </div>
 <!-- End Main Layout>-->
-
+<script> src="loginscript.js"</script>
 <script>
 
  fn_getassessments();
@@ -93,6 +93,7 @@ function fn_getassessments()
 {
             //get the user id from cookie
 			var userid = getCookie('userid');
+			alert("userid from getassessments "+userid);
             var xmlhttp = new XMLHttpRequest(); 
 			var url = "http://localhost:4000/user/"+userid;
 			
@@ -134,17 +135,15 @@ function getCookie(cname) {
 
 function fn_renderTable(response){
 setId =[];
+setTitle= [];
 let datat=response;
 
 for(var i = 0; i < datat.length; i++) {
    // delete jsonArry[i]['YYY'];
-let setResources=[datat[i].resources];
-let setUser=[datat[i].userSignup];
  setId[i]=[datat[i]._id].toString();
-let setassess=[datat[i].numAssessmentsPerUser];
-let setdesc=[datat[i].description];
-let setinst=[datat[i].instructions];
-let setTitle=[datat[i].title];
+
+ setTitle[i]=[datat[i].title];
+
 
 }
 
@@ -152,7 +151,7 @@ let objTable				= document.getElementById('table');
 let strTableData			='';
 
 
-	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black;">                  	'                   ;
+	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black; table-layout: fixed;">                  	'                   ;
 	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">                      '                   ;
 	//strTableData 				= strTableData + '	<td style="border: 1px solid black;"> ID </td>        '                   ;
 	
@@ -168,10 +167,10 @@ let strTableData			='';
 			strTableData 				= strTableData + '<tr style="border: 2px solid black;">                      '                   ;
 			//strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ i+' </td>  '          ;
 				
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].title]+' </td>  '          ;
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  '    ;
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].instructions]+' </td>  '   ;	
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="view resources" onclick="fn_navResources('+'setId['+i+']'+');">'+' </td>  '   ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black; style="word-wrap: break-word;"> '+[datat[i].title]+' </td>  ';
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  ';
+			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word"> '+[datat[i].instructions]+' </td>  ';	
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="view resources" style="background-color: #66b3ff;" onclick="fn_navResources('+'setId['+i+']'+','+'setTitle['+i+']'+');">'+' </td>  '   ;
 			
 			strTableData 				= strTableData + '</tr>';
 			}
@@ -180,12 +179,18 @@ let strTableData			='';
 	objTable.innerHTML	= strTableData;
 
 }
-function fn_navResources(setId){
+function fn_navResources(Id,Title){
 
 //fn_getresources(setId);
 
-//alert('setId'+setId);
-document.cookie = "assessmentid =" +setId;
+//alert('setTitle'+setTitle);
+document.cookie = "assessmentid =" +Id;
+document.cookie = "title =" +Title;
+
+alert('title'+Title);
+
+
+//document.cookie = "title =" +setId;
    window.location.href = "/Resources.html";
 }
 /*delete datat[i].resources;
@@ -224,7 +229,18 @@ function fn_setusername()
      //alert(getCookie('firstname'));
 	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
 }
+function fn_signout()
+{
+     //alert("Inside signout");
+     if (getCookie('userid')!="")
+		  {
+		  alert("Inside signout");
+		    document.cookie = "userid =";
+			document.cookie = "firstname =";
+			window.location.href = "/index.html";
+		  }
 
+}
 </script>
 </body>
 </html>
