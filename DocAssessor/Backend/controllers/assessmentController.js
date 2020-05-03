@@ -8,7 +8,6 @@ const Form = require("../models/formModel");
 
 //Dashboard View
 exports.dashboard = function(req,res){
-  //res.render(path.join(__dirname,'../view/home.html'));
   res.send("In dashboard");
 }
 
