@@ -38,22 +38,9 @@ body {
 		    <li>
 		    <a class="navbar-brand" href="#"> <div id="uname"></div></a>
 			</li>
-			<li>
-			<!--div id="username"> value="username"</div-->
-           		<a id="username" value="username" class="navbar-brand" href="#"></a>
 			
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  My Account
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				 <a class="dropdown-item" href="#">View Account</a>
-				 
-				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" href="#" onclick="fn_signout()" >Sign Out</a>
-				  <script> src="loginscripts.js"</script>
-				</div>
+			<li class="nav-item">
+				 <a class="nav-link"  href="#" onclick="fn_signout()">Sign Out</a>
 			</li>
         </ul>
     </div>
@@ -99,7 +86,7 @@ function fn_signout()
      //alert("Inside signout");
      if (getCookie('userid')!="")
 		  {
-		  alert("Inside signout");
+		  //alert("Inside signout");
 		    document.cookie = "userid =";
 			document.cookie = "firstname =";
 			window.location.href = "/index.html";

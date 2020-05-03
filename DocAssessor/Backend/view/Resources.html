@@ -9,7 +9,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <!-- Function to retrive assessment data from the server-->
 </head>
-<body>
+<body onload="fn_setusername()">
 <style>
 body {
   background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
@@ -35,16 +35,11 @@ body {
 			
         </ul>
         <ul class="navbar-nav ml-auto">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  My Account
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				 <a class="dropdown-item" href="#">View Account</a>
-				 
-				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" href="#" onclick="fn_signout()">Sign Out</a>
-				</div>
+		 <li>
+		    <a class="navbar-brand" href="#"> <div id="uname"></div></a>
+			</li>
+			<li class="nav-item">
+				 <a class="nav-link"  href="#" onclick="fn_signout()">Sign Out</a>
 			</li>
         </ul>
     </div>
@@ -176,12 +171,17 @@ function fn_signout()
      //alert("Inside signout");
      if (getCookie('userid')!="")
 		  {
-		  alert("Inside signout");
+		 // alert("Inside signout");
 		    document.cookie = "userid =";
 			document.cookie = "firstname =";
 			window.location.href = "/index.html";
 		  }
 
+}
+function fn_setusername()
+{
+     //alert(getCookie('firstname'));
+	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
 }
 </script>
 </body>

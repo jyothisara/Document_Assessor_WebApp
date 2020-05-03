@@ -12,7 +12,7 @@
 
 
 </head>
-<body>
+<body onload="fn_setusername()">
 <style>
 body {
   background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
@@ -40,16 +40,13 @@ body {
 			<!------------------------------------>
         </ul>
         <ul class="navbar-nav ml-auto">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  My Account
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				 <a class="dropdown-item" href="#">View Account</a>
-				 
-				  <div class="dropdown-divider"></div>
-				  <a class="dropdown-item" data-toggle="modal" href="#" onclick="fn_signout()">Sign Out</a>
-				</div>
+		 <li>
+		    <a class="navbar-brand" href="#"> <div id="uname"></div></a>
+			</li>
+			<li class="nav-item">
+				
+				  <a class="nav-link" href="#" onclick="fn_signout()">Sign Out</a>
+				
 			</li>
         </ul>
     </div>
@@ -107,7 +104,7 @@ function fn_sendassessment(form)
 			   //let token = JSON.stringify(xmlhttp.response);
 			   let res = JSON.parse(xmlhttp.response);
 			   
-			   alert("response after form submission"+res);
+			   //alert("response after form submission"+res);
 			   $('#successModal').modal('show')
 			   }
 			//alert("This is to test");
@@ -118,7 +115,7 @@ function fn_signout()
      //alert("Inside signout");
      if (getCookie('userid')!="")
 		  {
-		  alert("Inside signout");
+		  //alert("Inside signout");
 		    document.cookie = "userid =";
 			document.cookie = "firstname =";
 			window.location.href = "/index.html";
@@ -128,6 +125,11 @@ function fn_signout()
 function fn_redirect(){
    window.location.href = "/Resources.html";
 
+}
+function fn_setusername()
+{
+     //alert(getCookie('firstname'));
+	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
 }
 </script>
 <!-- Main Layout -->

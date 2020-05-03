@@ -91,6 +91,7 @@ body {
       <div class="modal-body">
         <form name="registerForm">
 		<div class="form-group">
+		<div id="registererror" style="color:red;font-size:12px"></div>
 			<label for="FirstName">First Name</label>
 			<input type="text" class="form-control" id="firstName" name="firstName" Placeholder="Enter First name">
 		  </div>
@@ -141,7 +142,7 @@ body {
 /*Function to check whether alread user logged in.If so go to users home page.*/
 function fn_checkLogin()
 {
-       alert("checklogin");
+       //alert("checklogin");
           if (getCookie('userid')!="")
 		  {
 		    window.location.href = "/home.html";
@@ -235,7 +236,7 @@ function fn_sendlogin(form)
 			   
 			   }else
 			   {
-			   alert(res.message);
+			   //alert(res.message);
 			    document.getElementById('loginerror').innerHTML= 'User name or password is incorrect';
 			   }
 			   //var x = document.cookie;
@@ -275,14 +276,17 @@ function fn_sendregister(form)
 			xmlhttp.onload = function(){
 			   //Get the token from the JSON response by parsing it.
 			   //let token = JSON.stringify(xmlhttp.response);
+			   
 			   let res = JSON.parse(xmlhttp.response);
+			   //alert("onload token"+res.token); 
 			   if(res.token){
 			   
 			   fn_getsession(res.token);
 			    
 			   }else
 			   {
-			   alert(res.msg);
+			   //alert(res.msg);
+			   document.getElementById('registererror').innerHTML= 'User by email already exists!';
 			   }
 			   //var token = res.token;
 			   
