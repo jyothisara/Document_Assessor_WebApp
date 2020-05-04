@@ -14,11 +14,13 @@
 <body onload="fn_checkLogin()">
 <style>
 body {
-  background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+ background-image:url('light-color-background.jpg');
+
+ <!--background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover;-->
 }
 
 </style>
@@ -33,7 +35,7 @@ body {
 	<!-- Sign in and Register links in the navigation bar-->
         <ul class="navbar-nav ml-auto">
 			<li class="nav-item active">
-                <a class="nav-link"  data-toggle="modal" data-target="#loginModal">Sign In <span class="sr-only">Sign In</span></a>
+                <a class="nav-link"  href="#" data-toggle="modal" data-target="#loginModal">Sign In <span class="sr-only">Sign In</span></a>
             </li>
 				
         </ul>
@@ -128,13 +130,18 @@ body {
 <!-- end Register modal --->
 <!-- Main Layout -->
 <div class="container">
-<div class="row">
-                <div class="col-sm-10 offset-sm-1 text-center">
-                    <h2 class="display-3">Welcome to  Document Assessor</h2>
+	<div class="row">
+        <div class="col-sm-10 offset-sm-1 text-center">
+             <h2 class="display-3">Welcome to  Document Assessor</h2>
+		</div>
+	</div>
+		<div class="row">
+			<div class="col text-center">
+				<div >
+					<div style="font-size:24px" >Signup and assess the resources of various reserach topics</div>
 				</div>
-			</div>
-
-</div>
+		</div>
+	</div>
 </div>
 <!-- End Main Layout>-->
 <script> src="loginscript.js"</script>

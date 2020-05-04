@@ -12,11 +12,12 @@
 <body onload="fn_setusername()">
 <style>
 body {
-  background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+background-image:url('light-color-background.jpg');
+ <!-- background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover;-->
 }
 </style>
 <!-- Navigation Bar -->
@@ -50,9 +51,9 @@ body {
 		<div class="row mx-auto">
 		<div class="col md-3  ">
 		<br>
-			<div class= "card  border border-warning">
+			<!--<div class= "card">-->
 					<h2 style="text-align:center " id="taskId"></h2>
-			</div>
+			<!--</div> -->
 		</div>
 		</div>
 	<div class="row mx-auto">
@@ -107,21 +108,23 @@ let strTableData			='';
 
 	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black;">';
 	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> ID </td>        '           ;
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resources </td>        '           ;
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Assessment </td>  '           ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> ID </td>';
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resources </td>';
+	//strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resource link</td>';
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Assessment </td>';
 
 	strTableData 				= strTableData + '</tr> ';
 	for(var i = 0; i < datat.length; i++){
 	
 			strTableData 				= strTableData + '<tr style="border: 2px solid black;">';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ (i+ 1)+' </td>  '  ;	
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> <a href="'+[datat[i].link]+'">'+ 'Resource link :'+(i+1)+'<a></td>  '          ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ (i+ 1)+' </td>';	
+			//strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].task]+'</td>';
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> <a href="'+[datat[i].link]+'">'+[datat[i].task]+'<a></td>';
 			if(datat[i].submissionStatus == false){
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Submit Assessment" onclick="fn_navResources('+'setId['+i+']'+');">'+' </td>  '   ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Submit Assessment" onclick="fn_navResources('+'setId['+i+']'+');">'+' </td>';
 			}
 			else{
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<div> Assesment already submitted</div>'+' </td>  '   ;			
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<div> Assesment already submitted</div>'+' </td>';			
 			}
 			strTableData 				= strTableData + '</tr>';
 		

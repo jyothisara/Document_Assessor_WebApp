@@ -16,11 +16,12 @@
 <body onload="fn_setusername()">
 <style>
 body {
-  background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+background-image:url('light-color-background.jpg');
+  <!--background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover;-->
 }
 </style>
 <!-- Navigation Bar -->
@@ -59,16 +60,29 @@ body {
 		<br>
 			
 				<h2 style="text-align:center ">All Tasks</h2>
-				<div class= "card border"></div>
-				<div class="card-body border border-dark text-dark bg-light">
+
 					<div id="table"></div>
-				</div>
+				
 			</div>
 		</div>
-		<div class="col"></div>
-	</div>
-	</div>
+
 </div>
+<!-- Modal -->
+<div class="modal fade" id="SignupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+         Do you want to sign up for the assessment task?
+	  </div>
+      <div class="modal-footer">
+	    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="fn_signup();">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- --->
 <!-- End Main Layout>-->
 <script> src="loginscript.js"</script>
 <script>
@@ -143,6 +157,7 @@ let strTableData			='';
 	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Title </td>        '                   ;
 	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Description </td>  '                   ;
 	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Instruction </td>  '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> No.of resources </td>';
 	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Sign up task </td>  '                   ;
 
 	strTableData 				= strTableData + '</tr>                     '                   ;
@@ -155,8 +170,9 @@ let strTableData			='';
 				
 			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].title]+' </td>  '          ;
 			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  '    ;
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;word-wrap: break-word;"> '+[datat[i].instructions]+' </td>  '   ;	
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Sign Up" style="background-color: #66b3ff;" onclick="fn_signup('+'setId['+i+']'+');">'+' </td>  '   ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word"> <a href="'+[datat[i].instructions]+'">'+ 'Instruction Details<a>' +'</td>';
+			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word;text-align=center"> '+[datat[i].numAssessmentsPerUser]+' </td>';			
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Sign Up" style="background-color: #66b3ff;" onclick="fn_displaysignupmodal('+'setId['+i+']'+');">'+' </td>  '   ;
 			
 			strTableData 				= strTableData + '</tr>';
 			}
@@ -165,10 +181,15 @@ let strTableData			='';
 	objTable.innerHTML	= strTableData;
 
 }
+function fn_displaysignupmodal(assessmentid){
+  document.cookie = "assessmentid =" +assessmentid;
+  $('#SignupModal').modal('show')
+}
 /*Function to sign up for the task*/
-function fn_signup(assessmentid)
+function fn_signup()
 {
             var userid = getCookie('userid');
+			var assessmentid = getCookie('assessmentid');
             var xmlhttp = new XMLHttpRequest(); 
             //var url = "http://localhost:4000/me";
 			/*assessment id hard coded for now*/
@@ -214,6 +235,7 @@ function fn_setusername()
      //alert(getCookie('firstname'));
 	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
 }
+
 </script>
 </body>
 </html>
