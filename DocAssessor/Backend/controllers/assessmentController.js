@@ -14,7 +14,6 @@ exports.dashboard = function(req,res){
 	//Assessments List
   exports.assessments = async (req, res) => {
     try {
-      console.log("In assessment dashboard   "+ req.params.u_id);
       const username = await User.findById({_id: req.params.u_id});
      const resource = await Resource.find({user:{id: username.id,userName: username.userName}}, {id:1});
       const assessment = await Assessment.find({resources: { $in: resource }}) ;

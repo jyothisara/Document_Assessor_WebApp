@@ -21,9 +21,9 @@ app.use('/', routes);
 
 
 //View engine
-app.set('views',path.join(__dirname,'view'));
-app.set('view engine','ejs');
-app.engine('html',require('ejs').renderFile);
+//app.set('views',path.join(__dirname,'view'));
+//app.set('view engine','ejs');
+//app.engine('html',require('ejs').renderFile);
 //static resource
 app.use('/', express.static('view'));
 
