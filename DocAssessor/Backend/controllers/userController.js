@@ -92,8 +92,6 @@ exports.register = async (req, res) => {
 exports.login= async (req,res) => {
     const  email = req.body.email;
     const  password  = req.body.password;
-    console.log(req.body.email);
-    console.log(req.body.password);
       let user = await User.findOne({
         email
       });
@@ -132,11 +130,8 @@ exports.login= async (req,res) => {
 
  //My profile
  exports.session = async (req, res) => {
-   console.log("Inside session");
     try {
       const user = await User.findById(req.user.id);
-      console.log("Inside session try");
-      console.log(user);
       res.json(user);
     } catch (e) {
       console.log("Inside session catch");
