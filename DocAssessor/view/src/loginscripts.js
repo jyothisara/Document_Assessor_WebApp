@@ -79,7 +79,7 @@ function fn_sendlogin(form)
             xmlhttp.send(data); 
 			
 			//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
-			
+			document.getElementById('loginerror').innerHTML='';
 			xmlhttp.onload = function(){
 			   //Get the token from the JSON response by parsing it.
 			   //let token = JSON.stringify(xmlhttp.response);
@@ -120,43 +120,55 @@ function fn_sendregister(form)
             // Set the request header i.e. which type of content you are sending 
             xmlhttp.setRequestHeader("Content-Type", "application/json"); 
 			
-			       //alert("After open");   
-            
-  
-            // Converting JSON data to string 
-           
-            var data = JSON.stringify({ "firstName": form.firstName.value,"lastName": form.lastName.value,"userName": form.userName.value,"email": form.registeremail.value,"password": form.registerpassword.value}); 			
-            
-            // Sending data with the request 
-            xmlhttp.send(data); 
-			
-			//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
-			
-			xmlhttp.onload = function(){
-			   //Get the token from the JSON response by parsing it.
-			   //let token = JSON.stringify(xmlhttp.response);
+			if((form.userName.value).length < 6)
+			{
+				document.getElementById('usernamererror').innerHTML= 'Username must be 6 or more characters';
+				
+            }else if((form.registerpassword.value).length < 6)
+			{
+				document.getElementById('passwordrerror').innerHTML= 'Password must be 6 or more characters';
+				
+            }
+			else{
+				// Converting JSON data to string 
 			   
-			   let res = JSON.parse(xmlhttp.response);
-			   //alert("onload token"+res.token); 
-			   document.getElementById('registererror').innerHTML= ' ';
-			   if(res.token){
-			   
-			   fn_getsession(res.token);
-			    
-			   }else
-			   {
-			   alert(res.msg);
-			   document.getElementById('registererror').innerHTML= 'User by email already exists!';
-			   }
-			   //var token = res.token;
-			   
-			   //save the token to cookie for later user use.
-			   
-			   //var x = document.cookie;
-			   //alert(x);
-			   /*TODO : Login fail error conditions to be checked and implemented here*/
-              //alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
-			   }
+				var data = JSON.stringify({ "firstName": form.firstName.value,"lastName": form.lastName.value,"userName": form.userName.value,"email": form.registeremail.value,"password": form.registerpassword.value}); 			
+				
+				// Sending data with the request 
+				xmlhttp.send(data); 
+				
+				//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+				
+				xmlhttp.onload = function(){
+				   //Get the token from the JSON response by parsing it.
+				   //let token = JSON.stringify(xmlhttp.response);
+				   
+				   let res = JSON.parse(xmlhttp.response);
+				  // alert("onload token"+res.token); 
+				   document.getElementById('registererror').innerHTML= ' ';
+				   if(res.token){
+				   
+				   //fn_getsession(res.token);
+				   
+				   document.getElementById('loginerror').innerHTML= 'User registered successfully.Login here.';
+				   $('#registerModal').modal('hide')
+				   $('#loginModal').modal('show')
+					
+				   }else
+				   {
+				  
+				   document.getElementById('registererror').innerHTML= 'User by email already exists!';
+				   }
+				   //var token = res.token;
+				   
+				   //save the token to cookie for later user use.
+				   
+				   //var x = document.cookie;
+				   //alert(x);
+				   /*TODO : Login fail error conditions to be checked and implemented here*/
+				  //alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
+				   }
+			}
 			//alert("This is to test");
 			event.preventDefault();
 }
@@ -195,5 +207,9 @@ function fn_setusername()
 		// alert(document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname'));
 		//alert('localStorage.getItem("firstname")'+sessionStorage.getItem("firstname"));
 		//document.getElementById("uname").innerHTML = sessionStorage.getItem("firstname");
+
+}
+function fn_redirect(){
+   $('#loginModal').modal('show')
 
 }
