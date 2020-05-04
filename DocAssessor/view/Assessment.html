@@ -53,86 +53,8 @@ background-image:url('light-color-background.jpg');
     </div>
 </nav>
 <!-- end navigation -->
-<script> src="loginscript.js"</script>
-<script>
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-//Funtion to submit the assessment form
-function fn_sendassessment(form)
-{ 
-             var userid = getCookie('userid'); 
-			  var assessmentid = getCookie('assessmentid'); 
-			   var resourceId = getCookie('resourceId'); 
-			   
-            // Creating a XMLHttpRequest object 
-            var xmlhttp = new XMLHttpRequest(); 
-            //var url = "http://localhost:4000/login"; 
-            var url = "http://localhost:4000/user/"+userid+"/assessment/"+assessmentid+"/resource/"+resourceId;
-            // open a connection 
-			
-            xmlhttp.open("POST", url, true); 
-			           
-			
-            // Set the request header i.e. which type of content you are sending 
-            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
-			
-			       
-            
-  
-            // Converting JSON data to string 
-            var data = JSON.stringify({ "text": form.feedback.value, "rating": form.rating.value }); 
-  
-            // Sending data with the request 
-            xmlhttp.send(data); 
-			
-			//xmlhttp.onload = () => window.location.href = "/home.html";//alert(JSON.stringify(xmlhttp.response));//alert(request);//window.location.href = "/home.html";
-			
-			xmlhttp.onload = function(){
-			   //Get the token from the JSON response by parsing it.
-			   //let token = JSON.stringify(xmlhttp.response);
-			   let res = JSON.parse(xmlhttp.response);
-			   
-			   //alert("response after form submission"+res);
-			   $('#successModal').modal('show')
-			   }
-			//alert("This is to test");
-			event.preventDefault();
-}
-function fn_signout()
-{
-     //alert("Inside signout");
-     if (getCookie('userid')!="")
-		  {
-		  //alert("Inside signout");
-		    document.cookie = "userid =";
-			document.cookie = "firstname =";
-			window.location.href = "/index.html";
-		  }
-
-}
-function fn_redirect(){
-   window.location.href = "/Resources.html";
-
-}
-function fn_setusername()
-{
-     //alert(getCookie('firstname'));
-	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
-}
-</script>
+<script src="src/loginscripts.js"></script>
+<script src="src/resources.js"></script>
 <!-- Main Layout -->
 <div class="container">
 	<div class="row mx-auto">

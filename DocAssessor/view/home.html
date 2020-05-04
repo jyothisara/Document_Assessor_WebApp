@@ -48,10 +48,6 @@ background-image:url('light-color-background.jpg');
 </nav>
 <!-- end navigation -->
 
-<!-- Log out modal to be added ---->
-
-<!-- end login modal --->
-
 <!-- Main Layout -->
 <div class="container">
 <div class="row">
@@ -80,45 +76,7 @@ background-image:url('light-color-background.jpg');
 </div>
 </div>
 <!-- End Main Layout>-->
-<script> src="loginscripts.js"</script>
-<script>
-function fn_signout()
-{
-     //alert("Inside signout");
-     if (getCookie('userid')!="")
-		  {
-		  //alert("Inside signout");
-		    document.cookie = "userid =";
-			document.cookie = "firstname =";
-			window.location.href = "/index.html";
-		  }
+<script src="src/loginscripts.js"></script>
 
-}
-function fn_setusername()
-{
-     //alert(getCookie('firstname'));
-	// document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
-		 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
-		// alert(document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname'));
-		//alert('localStorage.getItem("firstname")'+sessionStorage.getItem("firstname"));
-		//document.getElementById("uname").innerHTML = sessionStorage.getItem("firstname");
-
-}
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-</script>
 </body>
 </html>
