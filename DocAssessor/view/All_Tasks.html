@@ -1,4 +1,3 @@
-
 <html>
 <head>
 <!-- Bootstrap Style sheet  -->
@@ -8,20 +7,13 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<!-- Function to retrive assessment data from the server-->
-
-<!--  can .js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/handsontable@7.4.2/dist/handsontable.full.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/handsontable@7.4.2/dist/handsontable.full.min.css" rel="stylesheet" media="screen">
-	
-<script>
 
 
 
-</script>
+
 
 </head>
-<body onload="fn_setusername()" >
+<body onload="fn_setusername()">
 <style>
 body {
   background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
@@ -39,17 +31,14 @@ body {
                 <a class="nav-link" href="home.html">Home <span class="sr-only">Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" >My Tasks</a>
+                <a class="nav-link" href="My Task.html">My Tasks</a>
             </li>
 			<li class="nav-item">
                 <a class="nav-link" href="All_Tasks.html">View Task List</a>
             </li>
-			<!---For testing scipt-->
-			<!--button type="button" onclick="fn_getassessments()"> Display</button-->
-			<!------------------------------------>
         </ul>
         <ul class="navbar-nav ml-auto">
-				    <li>
+		 <li>
 		    <a class="navbar-brand" href="#"> <div id="uname"></div></a>
 			</li>
 			<li class="nav-item">
@@ -59,15 +48,19 @@ body {
     </div>
 </nav>
 <!-- end navigation -->
+<script>
+
+</script>
+
 <!-- Main Layout -->
 <div class="container">
 	<div class="row mx-auto">
 		<div class="col md-3  ">
 		<br>
 			
-				<h2 style="text-align:center ">List of My tasks</h2>
-				<div class= "card  text-white bg-dark"></div>
-				<div class="card-body  text-dark bg-light">
+				<h2 style="text-align:center ">All Tasks</h2>
+				<div class= "card border"></div>
+				<div class="card-body border border-dark text-dark bg-light">
 					<div id="table"></div>
 				</div>
 			</div>
@@ -79,8 +72,7 @@ body {
 <!-- End Main Layout>-->
 <script> src="loginscript.js"</script>
 <script>
-
- fn_getassessments();
+fn_getassessments();
 function fn_getassessments()
 {
             //get the user id from cookie
@@ -124,18 +116,19 @@ function getCookie(cname) {
   }
   return "";
 }
-
 function fn_renderTable(response){
 setId =[];
-setTitle= [];
 let datat=response;
 
 for(var i = 0; i < datat.length; i++) {
    // delete jsonArry[i]['YYY'];
+let setResources=[datat[i].resources];
+let setUser=[datat[i].userSignup];
  setId[i]=[datat[i]._id].toString();
-
- setTitle[i]=[datat[i].title];
-
+let setassess=[datat[i].numAssessmentsPerUser];
+let setdesc=[datat[i].description];
+let setinst=[datat[i].instructions];
+let setTitle=[datat[i].title];
 
 }
 
@@ -150,19 +143,20 @@ let strTableData			='';
 	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Title </td>        '                   ;
 	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Description </td>  '                   ;
 	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Instruction </td>  '                   ;
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resources </td>  '                   ;
+	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Sign up task </td>  '                   ;
 
 	strTableData 				= strTableData + '</tr>                     '                   ;
 	for(var i = 0; i < datat.length; i++){
 	
-		if(datat[i].userSignup == true){
+		if(datat[i].userSignup != true){
+		    
 			strTableData 				= strTableData + '<tr style="border: 2px solid black;">                      '                   ;
 			//strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ i+' </td>  '          ;
 				
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; style="word-wrap: break-word;"> '+[datat[i].title]+' </td>  ';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  ';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word"> '+[datat[i].instructions]+' </td>  ';	
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="view resources" style="background-color: #66b3ff;" onclick="fn_navResources('+'setId['+i+']'+','+'setTitle['+i+']'+');">'+' </td>  '   ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].title]+' </td>  '          ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  '    ;
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;word-wrap: break-word;"> '+[datat[i].instructions]+' </td>  '   ;	
+			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Sign Up" style="background-color: #66b3ff;" onclick="fn_signup('+'setId['+i+']'+');">'+' </td>  '   ;
 			
 			strTableData 				= strTableData + '</tr>';
 			}
@@ -171,55 +165,37 @@ let strTableData			='';
 	objTable.innerHTML	= strTableData;
 
 }
-function fn_navResources(Id,Title){
-
-//fn_getresources(setId);
-
-//alert('setTitle'+setTitle);
-document.cookie = "assessmentid =" +Id;
-document.cookie = "title =" +Title;
-
-//alert('title'+Title);
-
-
-//document.cookie = "title =" +setId;
-   window.location.href = "/Resources.html";
-}
-/*delete datat[i].resources;
-delete datat[i].userSignup;
-delete datat[i]._id;
-delete datat[i].numAssessmentsPerUser;
-}
-var hotElement = document.querySelector('#cold');
-var hotElementContainer = hotElement.parentNode;
-var hotSettings = {
-  data: datat,
-  stretchH: 'all',
-  width: 806,
-  autoWrapRow: true,
-  height: 487,
-  maxRows: 22,
-  manualRowResize: true,
-  manualColumnResize: true,
-  rowHeaders: true,
-  colHeaders: [
-    'Title',
-    'Description',
-    'Instructions'
-  ],
-  manualRowMove: true,
-  manualColumnMove: true,
-  contextMenu: true,
-  filters: true,
-  dropdownMenu: true
-};
-var hot = new Handsontable(hotElement, hotSettings);
-
-}*/
-function fn_setusername()
+/*Function to sign up for the task*/
+function fn_signup(assessmentid)
 {
-     //alert(getCookie('firstname'));
-	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
+            var userid = getCookie('userid');
+            var xmlhttp = new XMLHttpRequest(); 
+            //var url = "http://localhost:4000/me";
+			/*assessment id hard coded for now*/
+			var url = "http://localhost:4000/user/"+userid+"/assessment-signup/"+assessmentid;
+			//var url = "http://localhost:4000/user/"+userid+"/assessment-signup/"+"5e9778510ae08b2324a96284";
+			//alert(url);
+			xmlhttp.open("POST", url, true);
+			// Set the request header i.e. which type of content you are sending 
+            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
+			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
+			
+			xmlhttp.send();
+			
+			
+            xmlhttp.onload = function(){
+			   //Get the user session details from server.
+			   let res = JSON.parse(xmlhttp.response);
+			   //alert(res.message);
+			   /*var userid = res._id;
+			   var firstname = res.firstName;*/
+			   //alert("response received");
+			   //alert(res[1].description);
+			   //save the token to cookie for later user use.
+			   window.location.href = "/All_Tasks.html";
+			   //document.cookie = "firstname =" +firstname;
+			   
+			   }
 }
 function fn_signout()
 {
@@ -232,6 +208,11 @@ function fn_signout()
 			window.location.href = "/index.html";
 		  }
 
+}
+function fn_setusername()
+{
+     //alert(getCookie('firstname'));
+	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
 }
 </script>
 </body>
