@@ -1,6 +1,7 @@
 /**************************************************************
 *   app.js
 *   This file is to initialise the the webapp using node.js
+*
 *   @Author : Jyothi Sara Thomas
 **************************************************************/
 

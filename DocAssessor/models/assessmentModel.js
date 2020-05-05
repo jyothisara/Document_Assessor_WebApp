@@ -8,7 +8,6 @@
 
 const mongoose = require('mongoose');
 
-//Model for assessments collection 
 const assessmentSchema = new mongoose.Schema({
     title: {
         type: String,

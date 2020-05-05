@@ -3,6 +3,7 @@
 *   auth.js
 *   This file includes the javascript  methods for user sessions,
 *   and tokenisation. 
+*
 *   @Author : Jyothi Sara Thomas
 **************************************************************/
 

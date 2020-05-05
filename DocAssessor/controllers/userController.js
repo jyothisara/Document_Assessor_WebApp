@@ -3,7 +3,8 @@
 *   This file includes the javascript controller methods for  
 *   user functions, which is the logic of how the app handles 
 *   the incoming requests and outgoing responses for user 
-*   registration, login and session handling. 
+*   registration, login and session handling.
+* 
 *   @Author : Jyothi Sara Thomas
 **************************************************************/
 
