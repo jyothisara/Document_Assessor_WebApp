@@ -16,6 +16,7 @@ const userController = require('../controllers/userController');
 const assessmentController = require('../controllers/assessmentController');
 const resourceController = require('../controllers/resourceController');
 
+
 //Auth import
 const auth = require('../middleware/auth')
 
@@ -28,6 +29,7 @@ router.get('/user/:u_id', assessmentController.assessments) //List the assessmen
 router.post('/user/:u_id/assessment-signup/:a_id', assessmentController.signup) //Signup for assessment
 router.get('/user/:u_id/assessment/:a_id', resourceController.resources) //List the resources
 router.post('/user/:u_id/assessment/:a_id/resource/:r_id', resourceController.submitForm) //Submit assessment form
+
 
 module.exports = router;
 

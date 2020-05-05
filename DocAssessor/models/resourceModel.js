@@ -8,6 +8,7 @@
 
 const mongoose = require('mongoose');
 
+//Model for resources collection 
 const resourceSchema = new mongoose.Schema({
     task: {
         type: String,

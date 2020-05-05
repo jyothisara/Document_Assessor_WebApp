@@ -8,6 +8,7 @@
 
 const mongoose = require("mongoose");
 
+//Model for users collection 
 const userSchema = mongoose.Schema({
   firstName: {
     type: String,

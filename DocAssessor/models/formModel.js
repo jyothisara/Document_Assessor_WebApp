@@ -8,7 +8,7 @@
 
 const mongoose = require('mongoose');
 
-
+//Model for forms collection 
 const formSchema = new mongoose.Schema({
     link: {
         type: String

@@ -13,11 +13,10 @@ const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-//Models Import
+//Model Import
 const User = require("../models/userModel");
 
-
-//User Registration
+//New User Registration
 exports.validate = (method) => {
   switch (method) {
     case 'register': {
