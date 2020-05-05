@@ -1,3 +1,5 @@
+//Script to handle and verify token
+
 const jwt = require("jsonwebtoken");
 
 module.exports = function(req, res, next) {
