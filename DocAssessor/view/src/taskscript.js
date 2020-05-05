@@ -70,14 +70,14 @@ function fn_rendermytasksTable(response){
 	let objTable				= document.getElementById('table');
 	let strTableData			='';
 
-	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black; table-layout: fixed;">';
+	strTableData 				= strTableData + '<table width="100%" style="border: 2px solid black; table-layout: fixed;">';
 	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">';
 		
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Title </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Description </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Instruction </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> No.of resources </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resources </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Title </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Description </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Instruction </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> No.of resources </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Resources </td>';
 
 	strTableData 				= strTableData + '</tr>';
 	
@@ -87,11 +87,11 @@ function fn_rendermytasksTable(response){
 		if(datat[i].userSignup == true){
 			strTableData 				= strTableData + '<tr style="border: 2px solid black;">';
 							
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; style="word-wrap: break-word;"> '+[datat[i].title]+' </td>';
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black; style="word-wrap: break-word;"> '+[datat[i].title]+' </td>';
 			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word"> <a href="'+[datat[i].instructions]+'">'+ 'Instruction Details<a>' +'</td>';	
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word;text-align=center"> '+[datat[i].numAssessmentsPerUser]+' </td>';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="view resources" style="background-color: #66b3ff;" onclick="fn_navResources('+'setId['+i+']'+','+'setTitle['+i+']'+');">'+' </td>';
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black; word-wrap:break-word"> <a href="'+[datat[i].instructions]+'">'+ 'Instruction Details<a>' +'</td>';	
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black; word-wrap:break-word;text-align=center"> '+[datat[i].numAssessmentsPerUser]+' </td>';
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;">'+ '<input type="button" value="view resources" style="background-color: #66b3ff;" onclick="fn_navResources('+'setId['+i+']'+','+'setTitle['+i+']'+');">'+' </td>';
 			
 			strTableData 				= strTableData + '</tr>';
 		}
@@ -171,14 +171,14 @@ function fn_renderTable(response){
 	let strTableData			='';
 
 
-	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black; table-layout: fixed;">';
+	strTableData 				= strTableData + '<table width="100%" style="border: 2px solid black; table-layout: fixed;">';
 	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">';
 		
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Title </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Description </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Instruction </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> No.of resources </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Sign up task </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Title </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Description </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Instruction </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> No.of resources </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> Sign up task </td>';
 
 	strTableData 				= strTableData + '</tr>';
 	
@@ -188,11 +188,11 @@ function fn_renderTable(response){
 		if(datat[i].userSignup != true){
 		  	strTableData 				= strTableData + '<tr style="border: 2px solid black;">';
 							
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+[datat[i].title]+' </td>';
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> '+[datat[i].title]+' </td>';
 			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word"> <a href="'+[datat[i].instructions]+'">'+ 'Instruction Details<a>' +'</td>';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word;text-align=center"> '+[datat[i].numAssessmentsPerUser]+' </td>';			
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Sign Up" style="background-color: #66b3ff;" onclick="fn_displaysignupmodal('+'setId['+i+']'+');">'+' </td>';
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black; word-wrap:break-word"> <a href="'+[datat[i].instructions]+'">'+ 'Instruction Details<a>' +'</td>';
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black; word-wrap:break-word;text-align=center"> '+[datat[i].numAssessmentsPerUser]+' </td>';			
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;">'+ '<input type="button" value="Sign Up" style="background-color: #66b3ff;" onclick="fn_displaysignupmodal('+'setId['+i+']'+');">'+' </td>';
 			
 			strTableData 				= strTableData + '</tr>';
 		}

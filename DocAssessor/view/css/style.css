@@ -2,7 +2,42 @@ body{
 
 	background-image:url('grey-wallpaper-background.jpg');
 }
-div.container{
+td{
+	border: 2px solid black;
+}
+h2.display{
+	
+	font-family: "Times New Roman", Times, serif;
+	font-size:52px;
+}
+div.card-body{
+	text-align:center;
+	background-color:#DCDCDC;
+}
+div.card-header{
+	text-align:center;
+	
+}
+#login{
+	padding: 230px 0;
 	color:#006400;
 	font-family: "Times New Roman", Times, serif;
+}
+#home{
+	padding: 30px 0;
+	color:#006400;
+	
+}
+#tasks{
+	padding: 20px 0;
+	color:black;
+	text-align:center
+}
+#taskid{
+	padding: 20px 0;
+	color:black;
+	text-align:center
+}
+td.align{
+	text-align:center;
 }
