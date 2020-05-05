@@ -2,3 +2,7 @@ body{
 
 	background-image:url('grey-wallpaper-background.jpg');
 }
+div.container{
+	color:#006400;
+	font-family: "Times New Roman", Times, serif;
+}
