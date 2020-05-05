@@ -1,15 +1,24 @@
+/**************************************************************
+*   resourceController.js
+*   This file includes the javascript controller methods for the 
+*   resource listing and form submission, which is the logic of   
+*   how the app handles the incoming requests and outgoing 
+*   responses for resources. 
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
+
+
 const express = require("express");
 
 //Models Import
-const User = require("../models/userModel");
 const Assessment = require("../models/assessmentModel");
 const Resource = require("../models/resourceModel");
 const Form = require("../models/formModel");
 
+
 //Resouces List
 exports.resources = async (req, res) => {
     try {
-      //const username = await User.findById({_id: req.params.u_id});
       const assessment = await Assessment.findById({_id: req.params.a_id });
      const resource = await Resource.find({_id : {$in: assessment.resources}});
       res.json(resource);

@@ -1,3 +1,10 @@
+/**************************************************************
+*   db.js
+*   This file includes the javascript codes to connect to the
+*   DocAssessor Db hosted in Mongodb Atlas
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
+
 //declaring mongoose package to connect to db
 var mongoose = require('mongoose'); 
 

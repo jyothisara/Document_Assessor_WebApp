@@ -1,3 +1,10 @@
+/**************************************************************
+*   auth.js
+*   This file includes the javascript  methods for user sessions,
+*   and tokenisation. 
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
+
 const jwt = require("jsonwebtoken");
 
 module.exports = function(req, res, next) {

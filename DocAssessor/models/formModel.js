@@ -1,3 +1,11 @@
+/**************************************************************
+*   formModel.js
+*   This file includes the javascript codes for the database   
+*   model for collection "forms" in DocAssessor Database.
+* 
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
+
 const mongoose = require('mongoose');
 
 

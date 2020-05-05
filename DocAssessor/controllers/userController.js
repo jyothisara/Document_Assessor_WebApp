@@ -1,3 +1,13 @@
+/**************************************************************
+*   userController.js
+*   This file includes the javascript controller methods for  
+*   user functions, which is the logic of how the app handles 
+*   the incoming requests and outgoing responses for user 
+*   registration, login and session handling. 
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
+
+//Package Import
 const express = require("express");
 const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
@@ -5,7 +15,6 @@ const jwt = require("jsonwebtoken");
 
 //Models Import
 const User = require("../models/userModel");
-const Assessment = require("../models/assessmentModel");
 
 
 //User Registration
@@ -59,6 +68,7 @@ exports.register = async (req, res) => {
             password
         });
 
+        //Salting the password for security
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
 
@@ -136,7 +146,7 @@ exports.login= async (req,res) => {
       const user = await User.findById(req.user.id);
       res.json(user);
     } catch (e) {
-      console.log("Inside session catch");
+      console.log(e);
       res.status(500).json({ message: "Error in Fetching user" });
     }
   };
