@@ -1,4 +1,11 @@
-//Script to handle and verify token
+
+/**************************************************************
+*   auth.js
+*   This file includes the javascript  methods for user sessions,
+*   and tokenisation. 
+*
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
 
 const jwt = require("jsonwebtoken");
 

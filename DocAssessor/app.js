@@ -1,3 +1,10 @@
+/**************************************************************
+*   app.js
+*   This file is to initialise the the webapp using node.js
+*
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
+
 //package import
 const express = require('express');
 const bodyParser = require('body-parser');

@@ -1,6 +1,13 @@
+/**************************************************************
+*   userModel.js
+*   This file includes the javascript codes for the database   
+*   model for collection "users" in DocAssessor Database
+*   
+*   @Author : Jyothi Sara Thomas
+**************************************************************/
+
 const mongoose = require("mongoose");
 
-//Model for users collection 
 const userSchema = mongoose.Schema({
   firstName: {
     type: String,
