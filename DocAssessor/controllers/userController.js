@@ -3,12 +3,10 @@ const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-//Models Import
+//Model Import
 const User = require("../models/userModel");
-const Assessment = require("../models/assessmentModel");
 
-
-//User Registration
+//New User Registration
 exports.validate = (method) => {
   switch (method) {
     case 'register': {
@@ -77,7 +75,9 @@ exports.register = async (req, res) => {
             },
             (err, token) => {
                 if (err) throw err;
-           
+                res.status(200).json({
+                   token
+                });
           console.log("invoked home.html");
             }
         );

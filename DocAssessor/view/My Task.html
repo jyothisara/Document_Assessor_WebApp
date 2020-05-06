@@ -1,238 +1,66 @@
-
 <html>
-<head>
-<!-- Bootstrap Style sheet  -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<!-- Bootstrap JS file -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<!-- Function to retrive assessment data from the server-->
-
-<!--  can .js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/handsontable@7.4.2/dist/handsontable.full.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/handsontable@7.4.2/dist/handsontable.full.min.css" rel="stylesheet" media="screen">
-	
-<script>
-
-
-
-</script>
-
-</head>
-<body onload="fn_setusername()" >
-<style>
-body {
-  background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
-</style>
-<!-- Navigation Bar -->
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-collapse collapse justify-content-stretch" id="navbar">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="home.html">Home <span class="sr-only">Home</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" >My Tasks</a>
-            </li>
-			<li class="nav-item">
-                <a class="nav-link" href="All_Tasks.html">View Task List</a>
-            </li>
-			<!---For testing scipt-->
-			<!--button type="button" onclick="fn_getassessments()"> Display</button-->
-			<!------------------------------------>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-				    <li>
-		    <a class="navbar-brand" href="#"> <div id="uname"></div></a>
-			</li>
-			<li class="nav-item">
-				 <a class="nav-link"  href="#" onclick="fn_signout()">Sign Out</a>
-			</li>
-        </ul>
-    </div>
-</nav>
-<!-- end navigation -->
-<!-- Main Layout -->
-<div class="container">
-	<div class="row mx-auto">
-		<div class="col md-3  ">
-		<br>
-			
-				<h2 style="text-align:center ">My Tasks</h2>
-				<div class= "card  text-white bg-dark"></div>
-				<div class="card-body  text-dark bg-light">
-					<div id="table"></div>
-				</div>
-			</div>
-		</div>
-		<div class="col"></div>
-	</div>
-	</div>
-</div>
-<!-- End Main Layout>-->
-<script> src="loginscript.js"</script>
-<script>
-
- fn_getassessments();
-function fn_getassessments()
-{
-            //get the user id from cookie
-			var userid = getCookie('userid');
-			//alert("userid from getassessments "+userid);
-            var xmlhttp = new XMLHttpRequest(); 
-			var url = "http://localhost:4000/user/"+userid;
-			
-			xmlhttp.open("GET", url, true);
-			 // Set the request header i.e. which type of content you are sending 
-            xmlhttp.setRequestHeader("Content-Type", "application/json"); 
-			//xmlhttp.setRequestHeader("token", token); //set the token in the header.
-			
-			xmlhttp.send();
-
-            xmlhttp.onload = function(){
-			   //Get the user session details from server.
-			   response= JSON.parse(xmlhttp.response);
-				//alert(1);
-				
-				var names = response.map(function(item) {
-				  return item['description'];
-				 
-				});
-				 fn_renderTable(response);
-			   }   
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function fn_renderTable(response){
-setId =[];
-setTitle= [];
-let datat=response;
-
-for(var i = 0; i < datat.length; i++) {
-   // delete jsonArry[i]['YYY'];
- setId[i]=[datat[i]._id].toString();
-
- setTitle[i]=[datat[i].title];
-
-
-}
-
-let objTable				= document.getElementById('table');
-let strTableData			='';
-
-
-	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black; table-layout: fixed;">                  	'                   ;
-	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">                      '                   ;
-	//strTableData 				= strTableData + '	<td style="border: 1px solid black;"> ID </td>        '                   ;
-	
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Title </td>        '                   ;
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Description </td>  '                   ;
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Instruction </td>  '                   ;
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resources </td>  '                   ;
-
-	strTableData 				= strTableData + '</tr>                     '                   ;
-	for(var i = 0; i < datat.length; i++){
-	
-		if(datat[i].userSignup == true){
-			strTableData 				= strTableData + '<tr style="border: 2px solid black;">                      '                   ;
-			//strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ i+' </td>  '          ;
-				
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; style="word-wrap: break-word;"> '+[datat[i].title]+' </td>  ';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;" > '+[datat[i].description]+' </td>  ';
-			strTableData 				= strTableData + '	<td style="border: 2px solid black; word-wrap:break-word"> '+[datat[i].instructions]+' </td>  ';	
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="view resources" style="background-color: #66b3ff;" onclick="fn_navResources('+'setId['+i+']'+','+'setTitle['+i+']'+');">'+' </td>  '   ;
-			
-			strTableData 				= strTableData + '</tr>';
-			}
-	}
-		strTableData 				= strTableData + '</table>';
-	objTable.innerHTML	= strTableData;
-
-}
-function fn_navResources(Id,Title){
-
-//fn_getresources(setId);
-
-//alert('setTitle'+setTitle);
-document.cookie = "assessmentid =" +Id;
-document.cookie = "title =" +Title;
-
-//alert('title'+Title);
-
-
-//document.cookie = "title =" +setId;
-   window.location.href = "/Resources.html";
-}
-/*delete datat[i].resources;
-delete datat[i].userSignup;
-delete datat[i]._id;
-delete datat[i].numAssessmentsPerUser;
-}
-var hotElement = document.querySelector('#cold');
-var hotElementContainer = hotElement.parentNode;
-var hotSettings = {
-  data: datat,
-  stretchH: 'all',
-  width: 806,
-  autoWrapRow: true,
-  height: 487,
-  maxRows: 22,
-  manualRowResize: true,
-  manualColumnResize: true,
-  rowHeaders: true,
-  colHeaders: [
-    'Title',
-    'Description',
-    'Instructions'
-  ],
-  manualRowMove: true,
-  manualColumnMove: true,
-  contextMenu: true,
-  filters: true,
-  dropdownMenu: true
-};
-var hot = new Handsontable(hotElement, hotSettings);
-
-}*/
-function fn_setusername()
-{
-     //alert(getCookie('firstname'));
-	 document.getElementById('uname').innerHTML= 'Welcome ' +getCookie('firstname');
-}
-function fn_signout()
-{
-     //alert("Inside signout");
-     if (getCookie('userid')!="")
-		  {
-		  //alert("Inside signout");
-		    document.cookie = "userid =";
-			document.cookie = "firstname =";
-			window.location.href = "/index.html";
-		  }
-
-}
-</script>
-</body>
+    <head>
+        <!-- Bootstrap Style sheet  -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+		<!-- CSS style sheet-->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		
+		<!-- Bootstrap JS file -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+    </head>
+    <body onload="fn_setusername()" >
+        		
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="navbar-collapse collapse justify-content-stretch" id="navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home.html">Home <span class="sr-only">Home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" >My Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="All_Tasks.html">View Task List</a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <a class="navbar-brand" href="#">
+                            <div id="uname"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="#" onclick="fn_signout()">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- end navigation -->
+		
+        <!-- Main Layout -->
+        <div class="container">
+            <div class="row mx-auto">
+                <div class="col md-3  ">
+                    <br>
+                    <h2 id="tasks">My Tasks</h2>
+                    <div id="table"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Layout-->
+		
+		<!-- Source scripts-->
+        <script src="src/loginscripts.js"></script>
+        <script src="src/taskscript.js"></script>
+        <script>
+            fn_getmyassessments();
+            
+        </script>
+    </body>
 </html>
