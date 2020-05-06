@@ -3,19 +3,16 @@
         <!-- Bootstrap Style sheet  -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         
+		<!-- CSS style sheet-->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		
 		<!-- Bootstrap JS file -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </head>
     <body onload="fn_setusername()">
-        <style>
-		    <!--Back ground image -->
-            body {
-            background-image:url('light-color-background.jpg');
-            }
-        </style>
-		
+        		
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="navbar-collapse collapse justify-content-stretch" id="navbar">
@@ -45,29 +42,29 @@
         <!-- end of navigation bar -->
 		
         <!-- Main Layout -->
-        <div class="container">
+        <div id="home" class="container">
             <div class="row">
                 <div class="col-sm-10 offset-sm-1 text-center">
-                    <h2 class="display-3">Doc Assessor dashboard</h2>
+                    <h2 class="display">Doc Assessor dashboard</h2>
                 </div>
             </div>
             <div class="row h-50">
                 <div class="col my-auto">
-                    <div class="card border border-warning">
+                    <div class="card">
                         <div  class="card-header bg-dark text-white">
                             <h5>My tasks</h5>
                         </div>
-                        <div class="card-body" style="background-color:eaeae1">
+                        <div class="card-body" >
                             <a href="My task.html" class="btn btn-primary">Take me there</a>
                         </div>
                     </div>
                 </div>
                 <div class="col my-auto">
-                    <div class="card border border-warning">
+                    <div class="card">
                         <div class="card-header bg-dark text-white" ">
                             <h5>All tasks</h5>
                         </div>
-                        <div class="card-body" style="background-color:eaeae1">
+                        <div class="card-body" >
                             <a href="All_Tasks.html" class="btn btn-primary">Take me there</a>
                         </div>
                     </div>

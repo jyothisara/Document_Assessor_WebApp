@@ -30,12 +30,12 @@ function fn_renderResourceTable(response){
 	let strTableData			='';
 
     /*Define the table to display id,resource link and the button to submit assessment */
-	strTableData 				= strTableData + '<table width="100%" style="border: 1px solid black;">';
+	strTableData 				= strTableData + '<table width="100%" style="border: 2px solid black;">';
 	strTableData 				= strTableData + '<tr style="border: 1px solid black;background-color: #1a75ff">';
 
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> ID </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Resources </td>';
-	strTableData 				= strTableData + '	<td style="border: 1px solid black;"> Assessment Form </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 1px solid black;"> ID </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 1px solid black;"> Resources </td>';
+	strTableData 				= strTableData + '	<td class="align" style="border: 1px solid black;"> Assessment Form </td>';
 
     strTableData 				= strTableData + '</tr> ';
 	
@@ -43,13 +43,13 @@ function fn_renderResourceTable(response){
 	for(var i = 0; i < datat.length; i++){
 	
 		strTableData 				= strTableData + '<tr style="border: 2px solid black;">';
-		strTableData 				= strTableData + '	<td style="border: 2px solid black;"> '+ (i+ 1)+' </td>';	
-		strTableData 				= strTableData + '	<td style="border: 2px solid black;"> <a href="'+[datat[i].link]+'">'+[datat[i].task]+'<a></td>';
+		strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> '+ (i+ 1)+' </td>';	
+		strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;"> <a href="'+[datat[i].link]+'">'+[datat[i].task]+'<a></td>';
 		if(datat[i].submissionStatus == false){
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<input type="button" value="Submit Assessment" onclick="fn_navResources('+'setId['+i+']'+');">'+' </td>';
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;">'+ '<input type="button" value="Submit Assessment" onclick="fn_navResources('+'setId['+i+']'+');">'+' </td>';
 		}
 		else{
-			strTableData 				= strTableData + '	<td style="border: 2px solid black;">'+ '<div> Assesment already submitted</div>'+' </td>';			
+			strTableData 				= strTableData + '	<td class="align" style="border: 2px solid black;">'+ '<div> Assesment already submitted</div>'+' </td>';			
 		}
 		strTableData 				= strTableData + '</tr>';
 		
