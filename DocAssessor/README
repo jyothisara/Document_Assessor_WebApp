@@ -1,0 +1,16 @@
+Document Assessor is Web Application to assess documents online and provide feedback on the assesed documents.
+
+System Pre-requisites
+The system pre-requisites for hosting the Doc Assessor web application are:
+•	Npm v6.13.6 or higher
+•	NodeJS v13.8.0 or higher
+
+Data Pre-requisites
+As the researcher view is not included within scope of the developed app, the data for assessments and resources collections needs to be injected manually or using any data generation packages to the DocAssessor database in MongoDB.
+The IP address of the host system needs to be whitelisted to the DocAccessor IP list in Mongodb.
+
+Application Hosting
+•	To host the application, navigate to the app folder DocAssesor.
+•	Do npm install for installing all the project dependencies
+•	Then node app to get the app running on local host on port 4000.
+•	Go to http://localhost:4000/ from web browser.
